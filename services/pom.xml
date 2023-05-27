@@ -13,6 +13,7 @@
     <artifactId>services</artifactId>
     <packaging>pom</packaging>
     <modules>
+        <module>shows-data-service</module>
     </modules>
 
 </project>

@@ -1,4 +1,4 @@
-package com.demo.showcase;
+package com.demo.showcase.sds;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

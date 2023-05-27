@@ -1,4 +1,4 @@
-package com.demo.showcase;
+package com.demo.showcase.sds;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
