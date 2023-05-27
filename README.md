@@ -4,9 +4,9 @@ About project: TV shows list type of website with complex backend. \
 Structure:
 * services\
 Contains backend services
-    * Migration service
+    * Migration service \
     Service for database migrations with Liquibase
-    * Shows data service
+    * Shows data service \
     Service with access API to data about TV-Shows
 * common \
 Contains common shared configurations, sources and e.t.c.
