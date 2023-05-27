@@ -48,5 +48,8 @@ public class ShowsEntity {
 
     @Column(name = "episodes_count")
     private Integer episodesCount;
+
+    @Column(name = "seasons_count")
+    private Integer seasonsCount;
 }
 

@@ -1,6 +1,6 @@
 package com.demo.showcase.sds.controller;
 
-import com.demo.showcase.common.data.ShowsEntity;
+import com.demo.showcase.common.data.views.ShowsView;
 import com.demo.showcase.sds.api.ShowsDataApi;
 import com.demo.showcase.sds.service.ShowsDataService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ public class ShowsDataController implements ShowsDataApi {
     private final ShowsDataService showsDataService;
 
     @Override
-    public List<ShowsEntity> getAll() {
+    public List<ShowsView> getAll() {
         return showsDataService.getAll();
     }
 }
