@@ -1,6 +1,6 @@
 package com.demo.showcase.sds.controller;
 
-import com.demo.showcase.common.data.views.ShowsView;
+import com.demo.showcase.common.dto.ShowsView;
 import com.demo.showcase.sds.api.ShowsDataApi;
 import com.demo.showcase.sds.service.ShowsDataService;
 import lombok.RequiredArgsConstructor;

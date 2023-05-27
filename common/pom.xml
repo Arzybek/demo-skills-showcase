@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.demo</groupId>
         <artifactId>demo</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>common</artifactId>
@@ -15,6 +15,8 @@
     <modules>
         <module>data</module>
         <module>enums</module>
+        <module>feign-clients</module>
+        <module>dto</module>
     </modules>
 
 </project>

@@ -1,6 +1,6 @@
 package com.demo.showcase.common.data;
 
-import com.demo.showcase.common.data.views.ShowsView;
+import com.demo.showcase.common.dto.ShowsView;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -15,7 +15,7 @@ public class ShowsRepository {
 
     public List<ShowsView> findAll() {
         return em.createQuery("""
-                              select new com.demo.showcase.common.data.views.ShowsView(
+                              select new com.demo.showcase.common.dto.ShowsView(
                               s.id, s.title, s.stage, s.genre, s.startDate, s.country, s.endDate, s.episodesCount, s.seasonsCount)
                               from ShowsEntity s
                               """, ShowsView.class)

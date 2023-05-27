@@ -2,14 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>common</artifactId>
         <groupId>com.demo</groupId>
+        <artifactId>common</artifactId>
         <version>${revision}</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>data</artifactId>
+    <artifactId>dto</artifactId>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -17,10 +23,6 @@
             <artifactId>enums</artifactId>
             <version>${revision}</version>
         </dependency>
-        <dependency>
-            <groupId>com.demo</groupId>
-            <artifactId>dto</artifactId>
-            <version>${revision}</version>
-        </dependency>
     </dependencies>
+
 </project>

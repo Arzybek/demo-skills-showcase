@@ -1,4 +1,4 @@
-package com.demo.showcase.common.data.views;
+package com.demo.showcase.common.dto;
 
 import com.demo.showcase.common.enums.ShowGenre;
 import com.demo.showcase.common.enums.ShowStage;
@@ -31,3 +31,4 @@ public class ShowsView {
     private final Integer seasonsCount;
 
 }
+

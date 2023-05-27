@@ -1,6 +1,6 @@
 package com.demo.showcase.sds.api;
 
-import com.demo.showcase.common.data.views.ShowsView;
+import com.demo.showcase.common.dto.ShowsView;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;

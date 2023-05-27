@@ -25,3 +25,6 @@ spring:
 springdoc:
   paths-to-match:
     - /shows/**
+
+server:
+  port: 8080

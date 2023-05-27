@@ -1,7 +1,7 @@
 package com.demo.showcase.sds.service;
 
 import com.demo.showcase.common.data.ShowsRepository;
-import com.demo.showcase.common.data.views.ShowsView;
+import com.demo.showcase.common.dto.ShowsView;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
