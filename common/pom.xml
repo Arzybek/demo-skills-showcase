@@ -13,6 +13,8 @@
     <artifactId>common</artifactId>
     <packaging>pom</packaging>
     <modules>
+        <module>data</module>
+        <module>enums</module>
     </modules>
 
 </project>

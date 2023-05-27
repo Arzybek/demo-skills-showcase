@@ -14,7 +14,7 @@
             <column name="stage" type="varchar">
                 <constraints nullable="false"/>
             </column>
-            <column name="type" type="varchar">
+            <column name="genre" type="varchar">
                 <constraints nullable="false"/>
             </column>
             <column name="start_date" type="date">
@@ -25,7 +25,7 @@
             </column>
 
             <column name="end_date" type="date"/>
-            <column name="episodes" type="integer"/>
+            <column name="episodes_count" type="integer"/>
         </createTable>
     </changeSet>
 
