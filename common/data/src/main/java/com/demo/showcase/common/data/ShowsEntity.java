@@ -46,7 +46,7 @@ public class ShowsEntity {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @Column(name = "episdoes_count")
+    @Column(name = "episodes_count")
     private Integer episodesCount;
 }
 

@@ -1,0 +1,27 @@
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: shows-data-service
+  datasource:
+    url: ${POSTGRES_JDBC_URL:jdbc:postgresql://localhost:5432/postgresql}
+    username: ${POSTGRES_USERNAME:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 1
+      auto-commit: false
+  jpa:
+    show-sql: ${SHOW_SQL:false}
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate.default_schema: shows
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+
+springdoc:
+  paths-to-match:
+    - /shows/**
