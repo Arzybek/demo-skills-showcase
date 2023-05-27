@@ -6,5 +6,7 @@ public enum ShowGenre {
     ACTION,
     THRILLER,
     SITCOM,
-    HORROR
+    HORROR,
+    ANIME,
+    CARTOON
 }

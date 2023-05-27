@@ -29,4 +29,16 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="0.0.1-2" author="kat">
+        <addColumn tableName="shows">
+            <column name="seasons_count" type="integer">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+        <changeSet author="kat" id="0.0.1-3">
+            <loadData tableName="shows" file="data/shows.csv" relativeToChangelogFile="true" separator=","/>
+        </changeSet>
+
 </databaseChangeLog>
