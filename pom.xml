@@ -8,12 +8,21 @@
 		<version>3.1.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
+	<modules>
+		<module>common</module>
+		<module>services</module>
+	</modules>
+
 	<groupId>com.demo</groupId>
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>showcase</name>
 	<description>Demo project for skills showcase</description>
 	<properties>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
