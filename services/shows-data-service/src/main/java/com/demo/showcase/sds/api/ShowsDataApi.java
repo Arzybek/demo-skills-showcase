@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public interface ShowsDataApi {
     @Operation(summary = "Получение списка всех зарегистрированных сериалов")
     List<ShowsView> getAll();
 
-//    @PostMapping
-//    void createShow();
+    @GetMapping("/search")
+    @Operation(summary = "Поиск по сериалам")
+    List<ShowsView> find(@RequestParam(value="title") String title);
 }

@@ -18,4 +18,9 @@ public class ShowsDataController implements ShowsDataApi {
     public List<ShowsView> getAll() {
         return showsDataService.getAll();
     }
+
+    @Override
+    public List<ShowsView> find(String title) {
+        return showsDataService.find(title);
+    }
 }

@@ -18,4 +18,8 @@ public class ShowsDataService {
     public List<ShowsView> getAll() {
         return showsRepository.findAll();
     }
+
+    public List<ShowsView> find(String title) {
+        return showsRepository.find(title);
+    }
 }

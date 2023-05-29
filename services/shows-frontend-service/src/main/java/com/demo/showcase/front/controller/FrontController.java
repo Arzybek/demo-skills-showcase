@@ -21,4 +21,11 @@ public class FrontController {
         model.addAttribute("shows", shows);
         return "index";
     }
+
+    @GetMapping("/search")
+    public String search(Model model, String searchTitle) {
+        List<ShowsView> shows = showsDataFeignClient.findShows(searchTitle);
+        model.addAttribute("shows", shows);
+        return "index";
+    }
 }

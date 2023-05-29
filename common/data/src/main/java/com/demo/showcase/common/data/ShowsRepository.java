@@ -22,4 +22,14 @@ public class ShowsRepository {
                  .getResultList();
     }
 
+    public List<ShowsView> find(String title) {
+        return em.createQuery("""
+                              select new com.demo.showcase.common.dto.ShowsView(
+                              s.id, s.title, s.stage, s.genre, s.startDate, s.country, s.endDate, s.episodesCount, s.seasonsCount)
+                              from ShowsEntity s
+                              where s.title like concat('%',:title,'%')
+                              """, ShowsView.class)
+                 .setParameter("title", title)
+                 .getResultList();
+    }
 }
