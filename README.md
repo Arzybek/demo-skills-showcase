@@ -19,3 +19,11 @@ Contains docker-compose run files for easy running
 -----
 Демо проект для демонстрации навыков. \
 О проекте: сайт по типу IMDB со списком сериалов, с комплексным бэкэндом. 
+-----
+RUN GUIDE:\
+cd docker \
+sudo docker-compose -f postgres.yml up -d \
+Start migration service with environment variable: POSTGRES_SCHEMA=shows \
+Start data service \
+Start frontend service \
+You're up!
