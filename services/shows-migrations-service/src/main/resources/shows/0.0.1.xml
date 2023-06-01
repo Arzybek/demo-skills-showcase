@@ -37,8 +37,52 @@
         </addColumn>
     </changeSet>
 
-        <changeSet author="kat" id="0.0.1-3">
-            <loadData tableName="shows" file="data/shows.csv" relativeToChangelogFile="true" separator=","/>
-        </changeSet>
+    <changeSet author="kat" id="0.0.1-3">
+        <loadData tableName="shows" file="data/shows.csv" relativeToChangelogFile="true" separator=","/>
+    </changeSet>
+
+    <changeSet id="0.0.1-4" author="kat">
+        <createTable tableName="shows_pics">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="show_id" type="uuid">
+                <constraints nullable="false" foreignKeyName="fk_pic_show" references="shows(id)"/>
+            </column>
+            <column name="image" type="bytea">
+                <constraints nullable="true"/>
+            </column>
+            <column name="image_content_type" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="kat" id="0.0.1-5">
+        <loadData tableName="shows_pics" file="data/pics.csv" relativeToChangelogFile="true" separator=","/>
+    </changeSet>
+
+    <changeSet id="0.0.1-6" author="kat">
+        <update tableName="shows_pics">
+            <column name="image" type="bytea" valueBlobFile="data/images/OnePiece.jpg"/>
+            <column name="image_content_type" type="varchar(255)" value="image/jpeg"/>
+            <where>show_id = 'b2101aeb-2c6a-4798-836d-dca5c8879fd3'</where>
+        </update>
+        <update tableName="shows_pics">
+            <column name="image" type="bytea" valueBlobFile="data/images/Speechless.jpg"/>
+            <column name="image_content_type" type="varchar(255)" value="image/jpeg"/>
+            <where>show_id = '5e3832dd-291a-4f08-89e7-f817b5631c27'</where>
+        </update>
+        <update tableName="shows_pics">
+            <column name="image" type="bytea" valueBlobFile="data/images/EverybodyHatesChris.jpg"/>
+            <column name="image_content_type" type="varchar(255)" value="image/jpeg"/>
+            <where>show_id = 'e6485f21-35eb-4d57-a2df-a9c17fde0f90'</where>
+        </update>
+        <update tableName="shows_pics">
+            <column name="image" type="bytea" valueBlobFile="data/images/BreakingBad.jpg"/>
+            <column name="image_content_type" type="varchar(255)" value="image/jpeg"/>
+            <where>show_id = 'bde4cb35-f244-4bba-b3c2-646593433fba'</where>
+        </update>
+    </changeSet>
 
 </databaseChangeLog>

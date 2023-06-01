@@ -22,6 +22,7 @@
         <th>End date</th>
         <th>Episodes count</th>
         <th>Seasons count</th>
+        <th>Poster</th>
     </tr>
     <tr th:each="show: ${shows}">
         <td th:text="${show.title}"/>
@@ -32,6 +33,8 @@
         <td th:text="${show.endDate}"/>
         <td th:text="${show.episodesCount}"/>
         <td th:text="${show.seasonsCount}"/>
+        <td><img class="image" th:src="@{'/pictures/'+${shows.id}}">
+        </td>
     </tr>
     </tbody>
 </table>

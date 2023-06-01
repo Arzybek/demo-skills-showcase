@@ -5,6 +5,8 @@ import com.demo.showcase.common.dto.ShowsView;
 import com.demo.showcase.sds.api.ShowsDataApi;
 import com.demo.showcase.sds.service.ShowsDataService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -24,6 +26,11 @@ public class ShowsDataController implements ShowsDataApi {
     @Override
     public ShowsView getFullInfoById(UUID id) {
         return showsDataService.getFullInfoById(id);
+    }
+
+    @Override
+    public ResponseEntity<InputStreamResource> getImageByShowId(UUID id) {
+        return showsDataService.getPictureByShowId(id);
     }
 
     @Override

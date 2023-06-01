@@ -4,6 +4,9 @@ import com.demo.showcase.common.dto.ShowsShortInfo;
 import com.demo.showcase.common.dto.ShowsView;
 import com.demo.showcase.common.feign.ShowsDataFeignClient;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,5 +40,11 @@ public class FrontController {
         ShowsView shows = showsDataFeignClient.findShowInfoById(id);
         model.addAttribute("shows", shows);
         return "show";
+    }
+
+    @GetMapping("/pictures/{id}")
+    public ResponseEntity<Resource> getPoster(@PathVariable("id") UUID id) {
+        ResponseEntity<Resource> poster = showsDataFeignClient.findPosterByShowId(id);
+        return poster;
     }
 }
