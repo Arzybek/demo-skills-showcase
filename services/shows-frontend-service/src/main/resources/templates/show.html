@@ -17,11 +17,21 @@
         <th>Title</th>
         <th>Stage</th>
         <th>Genre</th>
+        <th>Start date</th>
+        <th>Country</th>
+        <th>End date</th>
+        <th>Episodes count</th>
+        <th>Seasons count</th>
     </tr>
     <tr th:each="show: ${shows}">
-        <td><a th:href="@{/{id}(id=${show.id})}"><span th:text="${show.title}"/></a></td>
+        <td th:text="${show.title}"/>
         <td th:text="${show.stage}"/>
         <td th:text="${show.genre}"/>
+        <td th:text="${show.startDate}"/>
+        <td th:text="${show.country}"/>
+        <td th:text="${show.endDate}"/>
+        <td th:text="${show.episodesCount}"/>
+        <td th:text="${show.seasonsCount}"/>
     </tr>
     </tbody>
 </table>
