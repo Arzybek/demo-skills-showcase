@@ -17,6 +17,7 @@
         <module>enums</module>
         <module>feign-clients</module>
         <module>dto</module>
+        <module>http-exceptions</module>
     </modules>
 
 </project>

@@ -11,10 +11,13 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.zalando.problem.Problem;
+import org.zalando.problem.Status;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -39,7 +42,11 @@ public class ShowsDataService {
     }
 
     public ResponseEntity<InputStreamResource> getPictureByShowId(UUID id) {
-        ShowsPicsEntity picsEntity = showsPicturesRepository.getPictureById(id);
+        Optional<ShowsPicsEntity> picsEntityOptional = showsPicturesRepository.getPictureById(id);
+        if (picsEntityOptional.isEmpty()) {
+            throw Problem.valueOf(Status.NOT_FOUND, "Picture wasn't found");
+        }
+        ShowsPicsEntity picsEntity = picsEntityOptional.get();
         return ResponseEntity.ok()
                              .contentLength(picsEntity.getImage().length)
                              .contentType(MediaType.parseMediaType(picsEntity.getImageContentType()))

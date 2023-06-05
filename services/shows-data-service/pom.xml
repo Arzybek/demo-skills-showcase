@@ -20,6 +20,11 @@
         </dependency>
         <dependency>
             <groupId>com.demo</groupId>
+            <artifactId>http-exceptions</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.demo</groupId>
             <artifactId>dto</artifactId>
             <version>${revision}</version>
         </dependency>
