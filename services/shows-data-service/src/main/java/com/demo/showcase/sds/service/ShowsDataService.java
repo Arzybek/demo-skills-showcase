@@ -5,6 +5,7 @@ import com.demo.showcase.common.data.ShowsPicturesRepository;
 import com.demo.showcase.common.data.ShowsRepository;
 import com.demo.showcase.common.dto.ShowsShortInfo;
 import com.demo.showcase.common.dto.ShowsView;
+import com.demo.showcase.common.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.InputStreamResource;
@@ -44,7 +45,7 @@ public class ShowsDataService {
     public ResponseEntity<InputStreamResource> getPictureByShowId(UUID id) {
         Optional<ShowsPicsEntity> picsEntityOptional = showsPicturesRepository.getPictureById(id);
         if (picsEntityOptional.isEmpty()) {
-            throw Problem.valueOf(Status.NOT_FOUND, "Picture wasn't found");
+            throw new NotFoundException();
         }
         ShowsPicsEntity picsEntity = picsEntityOptional.get();
         return ResponseEntity.ok()
