@@ -25,7 +25,7 @@ public interface ShowsDataApi {
     List<ShowsShortInfo> getShortInfoAll();
 
     @GetMapping("/{id}")
-    @Operation(summary = "Получение краткой информации о всех зарегистрированных сериалах")
+    @Operation(summary = "Получение полной информации о сериале")
     ShowsView getFullInfoById(@PathVariable UUID id);
 
     @GetMapping("/{id}/image")

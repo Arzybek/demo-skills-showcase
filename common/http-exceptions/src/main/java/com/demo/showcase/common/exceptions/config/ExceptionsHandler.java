@@ -1,6 +1,7 @@
 package com.demo.showcase.common.exceptions.config;
 
 import com.demo.showcase.common.exceptions.NotFoundException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -29,6 +30,12 @@ public class ExceptionsHandler implements ProblemHandling, HandlerAdvice {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<Problem> handleNotFoundException(NotFoundException exception, NativeWebRequest request) {
         return create(Status.NOT_FOUND, exception.getMessage(), request);
+    }
+
+
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+    public ResponseEntity<Problem> handleHibernateNoResultException(EmptyResultDataAccessException exception, NativeWebRequest request) {
+        return create(Status.NOT_FOUND, NotFoundException.NOT_FOUND_MSG, request);
     }
 
 }
