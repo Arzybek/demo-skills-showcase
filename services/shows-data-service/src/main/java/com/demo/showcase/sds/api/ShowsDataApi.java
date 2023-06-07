@@ -1,21 +1,29 @@
 package com.demo.showcase.sds.api;
 
+import com.demo.showcase.common.dto.ShowRequestDto;
 import com.demo.showcase.common.dto.ShowsShortInfo;
 import com.demo.showcase.common.dto.ShowsView;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 import java.util.UUID;
+import javax.validation.Valid;
 
 @RequestMapping(ShowsDataApi.SHOWS_DATA_API_PATH)
 @Tag(name = "Методы для работы с сериалами", description = ShowsDataApi.SHOWS_DATA_API_PATH)
+@Validated
 public interface ShowsDataApi {
 
     String SHOWS_DATA_API_PATH = "/shows";
@@ -28,11 +36,16 @@ public interface ShowsDataApi {
     @Operation(summary = "Получение полной информации о сериале")
     ShowsView getFullInfoById(@PathVariable UUID id);
 
+    @PutMapping("/{id}")
+    @Operation(summary = "Изменение информации о сериале")
+    @ResponseStatus(HttpStatus.OK)
+    void updateShowInfo(@PathVariable UUID id, @Valid @RequestBody ShowRequestDto showRequestDto);
+
     @GetMapping("/{id}/image")
     @Operation(summary = "Получение постера шоу")
     ResponseEntity<InputStreamResource> getImageByShowId(@PathVariable UUID id);
 
     @GetMapping("/search")
     @Operation(summary = "Поиск по сериалам")
-    List<ShowsShortInfo> find(@RequestParam(value="title") String title);
+    List<ShowsShortInfo> find(@RequestParam(value = "title") String title);
 }

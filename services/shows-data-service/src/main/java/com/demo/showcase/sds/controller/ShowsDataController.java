@@ -1,5 +1,6 @@
 package com.demo.showcase.sds.controller;
 
+import com.demo.showcase.common.dto.ShowRequestDto;
 import com.demo.showcase.common.dto.ShowsShortInfo;
 import com.demo.showcase.common.dto.ShowsView;
 import com.demo.showcase.sds.api.ShowsDataApi;
@@ -26,6 +27,11 @@ public class ShowsDataController implements ShowsDataApi {
     @Override
     public ShowsView getFullInfoById(UUID id) {
         return showsDataService.getFullInfoById(id);
+    }
+
+    @Override
+    public void updateShowInfo(UUID id, ShowRequestDto showRequestDto) {
+        showsDataService.updateShowInfo(id, showRequestDto);
     }
 
     @Override
