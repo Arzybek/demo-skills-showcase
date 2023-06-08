@@ -1,8 +1,8 @@
 package com.demo.showcase.sds.controller;
 
 import com.demo.showcase.common.dto.ShowRequestDto;
-import com.demo.showcase.common.dto.ShowsShortInfo;
-import com.demo.showcase.common.dto.ShowsView;
+import com.demo.showcase.common.dto.ShowShortInfo;
+import com.demo.showcase.common.dto.ShowView;
 import com.demo.showcase.sds.api.ShowsDataApi;
 import com.demo.showcase.sds.service.ShowsDataService;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +20,12 @@ public class ShowsDataController implements ShowsDataApi {
     private final ShowsDataService showsDataService;
 
     @Override
-    public List<ShowsShortInfo> getShortInfoAll() {
+    public List<ShowShortInfo> getShortInfoAll() {
         return showsDataService.getAll();
     }
 
     @Override
-    public ShowsView getFullInfoById(UUID id) {
+    public ShowView getFullInfoById(UUID id) {
         return showsDataService.getFullInfoById(id);
     }
 
@@ -35,12 +35,17 @@ public class ShowsDataController implements ShowsDataApi {
     }
 
     @Override
+    public ShowView createShow(ShowRequestDto showRequestDto) {
+        return showsDataService.createShow(showRequestDto);
+    }
+
+    @Override
     public ResponseEntity<InputStreamResource> getImageByShowId(UUID id) {
         return showsDataService.getPictureByShowId(id);
     }
 
     @Override
-    public List<ShowsShortInfo> find(String title) {
+    public List<ShowShortInfo> find(String title) {
         return showsDataService.find(title);
     }
 }

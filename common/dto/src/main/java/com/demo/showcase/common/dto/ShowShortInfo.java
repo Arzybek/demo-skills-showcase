@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Data
 @AllArgsConstructor
-public class ShowsShortInfo {
+public class ShowShortInfo {
 
     private final UUID id;
 

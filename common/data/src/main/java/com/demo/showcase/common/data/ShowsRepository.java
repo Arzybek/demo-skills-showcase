@@ -1,10 +1,8 @@
 package com.demo.showcase.common.data;
 
 import com.demo.showcase.common.dto.ShowRequestDto;
-import com.demo.showcase.common.dto.ShowsShortInfo;
-import com.demo.showcase.common.dto.ShowsView;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import com.demo.showcase.common.dto.ShowShortInfo;
+import com.demo.showcase.common.dto.ShowView;
 import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
 
@@ -14,45 +12,42 @@ import java.util.Map;
 import java.util.UUID;
 
 @Repository
-public class ShowsRepository {
+public class ShowsRepository extends BaseRepository<ShowEntity> {
 
-    @PersistenceContext
-    protected EntityManager em;
-
-    public List<ShowsShortInfo> findAll() {
+    public List<ShowShortInfo> findAll() {
         return em.createQuery("""
-                              select new com.demo.showcase.common.dto.ShowsShortInfo(
+                              select new com.demo.showcase.common.dto.ShowShortInfo(
                               s.id, s.title, s.stage, s.genre)
-                              from ShowsEntity s
-                              """, ShowsShortInfo.class)
+                              from ShowEntity s
+                              """, ShowShortInfo.class)
                  .getResultList();
     }
 
-    public List<ShowsShortInfo> find(String title) {
+    public List<ShowShortInfo> find(String title) {
         return em.createQuery("""
-                              select new com.demo.showcase.common.dto.ShowsShortInfo(
+                              select new com.demo.showcase.common.dto.ShowShortInfo(
                               s.id, s.title, s.stage, s.genre)
-                              from ShowsEntity s
+                              from ShowEntity s
                               where s.title like concat('%',:title,'%')
-                              """, ShowsShortInfo.class)
+                              """, ShowShortInfo.class)
                  .setParameter("title", title)
                  .getResultList();
     }
 
-    public ShowsView getFullInfoById(UUID id) {
+    public ShowView getFullInfoById(UUID id) {
         return em.createQuery("""
-                              select new com.demo.showcase.common.dto.ShowsView(
+                              select new com.demo.showcase.common.dto.ShowView(
                               s.id, s.title, s.stage, s.genre, s.startDate, s.country, s.endDate, s.episodesCount, s.seasonsCount)
-                              from ShowsEntity s
+                              from ShowEntity s
                               where s.id = :id
-                              """, ShowsView.class)
+                              """, ShowView.class)
                  .setParameter("id", id)
                  .getSingleResult();
     }
 
     public void updateShowInfo(UUID id, ShowRequestDto dto) {
         StringBuilder querySb = new StringBuilder("""
-                                                  update ShowsEntity s
+                                                  update ShowEntity s
                                                   set 
                                                   """);
         Map<String, Object> params = new HashMap<>();

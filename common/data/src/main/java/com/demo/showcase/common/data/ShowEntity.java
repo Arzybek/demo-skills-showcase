@@ -20,7 +20,7 @@ import java.util.UUID;
 @Entity
 @ToString
 @Table(name = "shows")
-public class ShowsEntity {
+public class ShowEntity {
 
     @Id
     @Column(name = "id")

@@ -1,7 +1,7 @@
 package com.demo.showcase.common.feign;
 
-import com.demo.showcase.common.dto.ShowsShortInfo;
-import com.demo.showcase.common.dto.ShowsView;
+import com.demo.showcase.common.dto.ShowShortInfo;
+import com.demo.showcase.common.dto.ShowView;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +17,13 @@ import java.util.UUID;
 public interface ShowsDataFeignClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/shows")
-    List<ShowsShortInfo> getShows();
+    List<ShowShortInfo> getShows();
 
     @RequestMapping(method = RequestMethod.GET, value = "/shows/search")
-    List<ShowsShortInfo> findShows(@RequestParam(value="title") String title);
+    List<ShowShortInfo> findShows(@RequestParam(value="title") String title);
 
     @RequestMapping(method = RequestMethod.GET, value = "/shows/{id}")
-    ShowsView findShowInfoById(@PathVariable UUID id);
+    ShowView findShowInfoById(@PathVariable UUID id);
 
     @RequestMapping(method = RequestMethod.GET, value = "/shows/{id}/image")
     ResponseEntity<Resource> findPosterByShowId(@PathVariable UUID id);

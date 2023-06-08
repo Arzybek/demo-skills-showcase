@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Data
 @AllArgsConstructor
-public class ShowsView {
+public class ShowView {
 
     private final UUID id;
 

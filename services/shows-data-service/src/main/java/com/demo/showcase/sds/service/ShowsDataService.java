@@ -1,12 +1,14 @@
 package com.demo.showcase.sds.service;
 
+import com.demo.showcase.common.data.ShowEntity;
 import com.demo.showcase.common.data.ShowsPicsEntity;
 import com.demo.showcase.common.data.ShowsPicturesRepository;
 import com.demo.showcase.common.data.ShowsRepository;
 import com.demo.showcase.common.dto.ShowRequestDto;
-import com.demo.showcase.common.dto.ShowsShortInfo;
-import com.demo.showcase.common.dto.ShowsView;
+import com.demo.showcase.common.dto.ShowShortInfo;
+import com.demo.showcase.common.dto.ShowView;
 import com.demo.showcase.common.exceptions.NotFoundException;
+import com.demo.showcase.sds.mapping.ShowsMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.InputStreamResource;
@@ -29,15 +31,17 @@ public class ShowsDataService {
 
     private final ShowsPicturesRepository showsPicturesRepository;
 
-    public List<ShowsShortInfo> getAll() {
+    private final ShowsMapper showsMapper;
+
+    public List<ShowShortInfo> getAll() {
         return showsRepository.findAll();
     }
 
-    public List<ShowsShortInfo> find(String title) {
+    public List<ShowShortInfo> find(String title) {
         return showsRepository.find(title);
     }
 
-    public ShowsView getFullInfoById(UUID id) {
+    public ShowView getFullInfoById(UUID id) {
         return showsRepository.getFullInfoById(id);
     }
 
@@ -56,5 +60,13 @@ public class ShowsDataService {
     @Transactional
     public void updateShowInfo(UUID id, ShowRequestDto showRequestDto) {
         showsRepository.updateShowInfo(id, showRequestDto);
+    }
+
+    @Transactional
+    public ShowView createShow(ShowRequestDto showRequestDto) {
+        UUID id = UUID.randomUUID();
+        ShowEntity showEntity = showsMapper.showDtoToEntity(id, showRequestDto);
+        showsRepository.persist(showEntity);
+        return showsMapper.showEntityToView(showEntity);
     }
 }

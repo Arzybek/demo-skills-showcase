@@ -29,6 +29,7 @@
 		<revision>0.0.1-SNAPSHOT</revision>
 		<lombok.version>1.18.28</lombok.version>
 		<spring.boot.version>3.1.0</spring.boot.version>
+		<mapstruct.version>1.5.5.Final</mapstruct.version>
 	</properties>
 
 	<dependencies>
@@ -87,6 +88,11 @@
 							<groupId>org.springframework.boot</groupId>
 							<artifactId>spring-boot-configuration-processor</artifactId>
 							<version>${spring.boot.version}</version>
+						</path>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${mapstruct.version}</version>
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
