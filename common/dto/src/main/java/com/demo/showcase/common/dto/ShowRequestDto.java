@@ -2,15 +2,14 @@ package com.demo.showcase.common.dto;
 
 import com.demo.showcase.common.enums.ShowGenre;
 import com.demo.showcase.common.enums.ShowStage;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 import java.time.LocalDate;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+
 
 @Data
-@Valid
 public class ShowRequestDto {
 
     @NotNull
