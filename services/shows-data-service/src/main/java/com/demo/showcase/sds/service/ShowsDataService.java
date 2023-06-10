@@ -29,8 +29,6 @@ public class ShowsDataService {
 
     private final ShowsRepository showsRepository;
 
-    private final ShowsPicturesRepository showsPicturesRepository;
-
     private final ShowsMapper showsMapper;
 
     public List<ShowShortInfo> getAll() {
@@ -43,18 +41,6 @@ public class ShowsDataService {
 
     public ShowView getFullInfoById(UUID id) {
         return showsRepository.getFullInfoById(id);
-    }
-
-    public ResponseEntity<InputStreamResource> getPictureByShowId(UUID id) {
-        Optional<ShowsPicsEntity> picsEntityOptional = showsPicturesRepository.getPictureById(id);
-        if (picsEntityOptional.isEmpty()) {
-            throw new NotFoundException();
-        }
-        ShowsPicsEntity picsEntity = picsEntityOptional.get();
-        return ResponseEntity.ok()
-                             .contentLength(picsEntity.getImage().length)
-                             .contentType(MediaType.parseMediaType(picsEntity.getImageContentType()))
-                             .body(new InputStreamResource(new ByteArrayInputStream(picsEntity.getImage())));
     }
 
     @Transactional

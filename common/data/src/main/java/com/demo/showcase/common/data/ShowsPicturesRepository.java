@@ -1,17 +1,12 @@
 package com.demo.showcase.common.data;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public class ShowsPicturesRepository {
-
-    @PersistenceContext
-    protected EntityManager em;
+public class ShowsPicturesRepository extends BaseRepository<ShowsPicsEntity> {
 
     public Optional<ShowsPicsEntity> getPictureById(UUID id) {
         return em.createQuery("""

@@ -5,6 +5,7 @@ import com.demo.showcase.common.dto.ShowShortInfo;
 import com.demo.showcase.common.dto.ShowView;
 import com.demo.showcase.sds.api.ShowsDataApi;
 import com.demo.showcase.sds.service.ShowsDataService;
+import com.demo.showcase.sds.service.ShowsPictureService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,8 @@ import java.util.UUID;
 public class ShowsDataController implements ShowsDataApi {
 
     private final ShowsDataService showsDataService;
+
+    private final ShowsPictureService showsPictureService;
 
     @Override
     public List<ShowShortInfo> getShortInfoAll() {
@@ -41,7 +44,7 @@ public class ShowsDataController implements ShowsDataApi {
 
     @Override
     public ResponseEntity<InputStreamResource> getImageByShowId(UUID id) {
-        return showsDataService.getPictureByShowId(id);
+        return showsPictureService.getPictureByShowId(id);
     }
 
     @Override
