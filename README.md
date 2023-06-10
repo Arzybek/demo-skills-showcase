@@ -1,4 +1,4 @@
-# Demo-showcase
+# Demo-skills-showcase
 Demo project for skills demonstration \
 About project: TV shows list type of website with complex backend. \
 Structure:
@@ -28,4 +28,5 @@ sudo docker-compose -f postgres.yml up -d \
 Start migration service with environment variable: POSTGRES_SCHEMA=shows \
 Start data service \
 Start frontend service \
-You're up, frontend address by default is: localhost:8081/
+You're up, frontend address by default is: localhost:8081/ \
+Backend swagger is available at localhost:8080/swagger-ui.html
