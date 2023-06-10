@@ -85,4 +85,14 @@
         </update>
     </changeSet>
 
+    <changeSet id="0.0.1-7" author="kat">
+        <addColumn tableName="shows">
+            <column name="is_deleted" type="boolean"/>
+        </addColumn>
+        <update tableName="shows">
+            <column name="is_deleted" valueBoolean="false"/>
+        </update>
+        <addNotNullConstraint tableName="shows" columnName="is_deleted"/>
+    </changeSet>
+
 </databaseChangeLog>

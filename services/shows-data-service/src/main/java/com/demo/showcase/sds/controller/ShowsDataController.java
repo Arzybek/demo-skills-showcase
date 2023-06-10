@@ -38,6 +38,11 @@ public class ShowsDataController implements ShowsDataApi {
     }
 
     @Override
+    public void deleteShowInfo(UUID id) {
+        showsDataService.deactualizeShowInfo(id);
+    }
+
+    @Override
     public ShowView createShow(ShowRequestDto showRequestDto) {
         return showsDataService.createShow(showRequestDto);
     }

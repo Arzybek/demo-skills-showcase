@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,6 +40,11 @@ public interface ShowsDataApi {
     @Operation(summary = "Изменение информации о сериале")
     @ResponseStatus(HttpStatus.OK)
     void updateShowInfo(@PathVariable UUID id, @Valid @RequestBody ShowRequestDto showRequestDto);
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Удаление информации о сериале")
+    @ResponseStatus(HttpStatus.OK)
+    void deleteShowInfo(@PathVariable UUID id);
 
     @PostMapping()
     @Operation(summary = "Добавление информации о сериале")

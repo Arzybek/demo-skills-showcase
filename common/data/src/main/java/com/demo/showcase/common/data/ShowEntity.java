@@ -51,5 +51,8 @@ public class ShowEntity {
 
     @Column(name = "seasons_count")
     private Integer seasonsCount;
+
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
 }
 

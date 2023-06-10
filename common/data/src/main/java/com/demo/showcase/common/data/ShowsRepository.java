@@ -19,18 +19,19 @@ public class ShowsRepository extends BaseRepository<ShowEntity> {
                               select new com.demo.showcase.common.dto.ShowShortInfo(
                               s.id, s.title, s.stage, s.genre)
                               from ShowEntity s
+                              where s.isDeleted = false
                               """, ShowShortInfo.class)
                  .getResultList();
     }
 
-    public List<ShowShortInfo> find(String title) {
+    public List<ShowShortInfo> findCaseInsensitiveBy(String title) {
         return em.createQuery("""
                               select new com.demo.showcase.common.dto.ShowShortInfo(
                               s.id, s.title, s.stage, s.genre)
                               from ShowEntity s
-                              where s.title like concat('%',:title,'%')
+                              where lower(s.title) like concat('%',:title,'%') and s.isDeleted = false
                               """, ShowShortInfo.class)
-                 .setParameter("title", title)
+                 .setParameter("title", title.toLowerCase().strip())
                  .getResultList();
     }
 
@@ -39,7 +40,7 @@ public class ShowsRepository extends BaseRepository<ShowEntity> {
                               select new com.demo.showcase.common.dto.ShowView(
                               s.id, s.title, s.stage, s.genre, s.startDate, s.country, s.endDate, s.episodesCount, s.seasonsCount)
                               from ShowEntity s
-                              where s.id = :id
+                              where s.id = :id and s.isDeleted = false
                               """, ShowView.class)
                  .setParameter("id", id)
                  .getSingleResult();
@@ -90,4 +91,11 @@ public class ShowsRepository extends BaseRepository<ShowEntity> {
         params.forEach(query::setParameter);
         query.executeUpdate();
     }
+
+    public void deactualizeById(UUID id) {
+        em.createQuery("update ShowEntity s set s.isDeleted = true where s.id = :id")
+          .setParameter("id", id)
+          .executeUpdate();
+    }
+
 }

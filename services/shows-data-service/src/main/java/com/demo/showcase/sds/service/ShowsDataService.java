@@ -1,25 +1,17 @@
 package com.demo.showcase.sds.service;
 
 import com.demo.showcase.common.data.ShowEntity;
-import com.demo.showcase.common.data.ShowsPicsEntity;
-import com.demo.showcase.common.data.ShowsPicturesRepository;
 import com.demo.showcase.common.data.ShowsRepository;
 import com.demo.showcase.common.dto.ShowRequestDto;
 import com.demo.showcase.common.dto.ShowShortInfo;
 import com.demo.showcase.common.dto.ShowView;
-import com.demo.showcase.common.exceptions.NotFoundException;
 import com.demo.showcase.sds.mapping.ShowsMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.ByteArrayInputStream;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -36,7 +28,7 @@ public class ShowsDataService {
     }
 
     public List<ShowShortInfo> find(String title) {
-        return showsRepository.find(title);
+        return showsRepository.findCaseInsensitiveBy(title);
     }
 
     public ShowView getFullInfoById(UUID id) {
@@ -54,5 +46,10 @@ public class ShowsDataService {
         ShowEntity showEntity = showsMapper.showDtoToEntity(id, showRequestDto);
         showsRepository.persist(showEntity);
         return showsMapper.showEntityToView(showEntity);
+    }
+
+    @Transactional
+    public void deactualizeShowInfo(UUID id) {
+        showsRepository.deactualizeById(id);
     }
 }
