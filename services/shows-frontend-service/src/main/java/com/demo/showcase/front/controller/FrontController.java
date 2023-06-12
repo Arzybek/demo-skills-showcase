@@ -8,6 +8,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -39,6 +40,12 @@ public class FrontController {
         ShowView shows = showsDataFeignClient.findShowInfoById(id);
         model.addAttribute("shows", shows);
         return "show";
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") UUID id, Model model) {
+        showsDataFeignClient.deleteShowInfoById(id);
+        return "redirect:/";
     }
 
     @GetMapping("/pictures/{id}")

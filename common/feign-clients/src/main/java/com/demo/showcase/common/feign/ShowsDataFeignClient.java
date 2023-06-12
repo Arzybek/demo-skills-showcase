@@ -25,6 +25,9 @@ public interface ShowsDataFeignClient {
     @RequestMapping(method = RequestMethod.GET, value = "/shows/{id}")
     ShowView findShowInfoById(@PathVariable UUID id);
 
+    @RequestMapping(method = RequestMethod.DELETE, value = "/shows/{id}")
+    void deleteShowInfoById(@PathVariable UUID id);
+
     @RequestMapping(method = RequestMethod.GET, value = "/shows/{id}/image")
     ResponseEntity<Resource> findPosterByShowId(@PathVariable UUID id);
 

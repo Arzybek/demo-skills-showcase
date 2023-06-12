@@ -1,2 +1,7 @@
 server:
   port: 8081
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
