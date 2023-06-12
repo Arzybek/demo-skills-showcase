@@ -1,5 +1,6 @@
 package com.demo.showcase.common.feign;
 
+import com.demo.showcase.common.dto.ShowRequestDto;
 import com.demo.showcase.common.dto.ShowShortInfo;
 import com.demo.showcase.common.dto.ShowView;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -30,5 +31,8 @@ public interface ShowsDataFeignClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/shows/{id}/image")
     ResponseEntity<Resource> findPosterByShowId(@PathVariable UUID id);
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/shows/{id}")
+    void editShowInfoById(@PathVariable UUID id, ShowRequestDto showRequestDto);
 
 }

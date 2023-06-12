@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>TV Shows demo app</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
 </head>
 <body>
+<a href="/"><button>Home</button></a>
 <form th:action="@{/search}" method="get">
     <input type="text" name="searchTitle" th:value="${searchTitle}" placeholder="Find TV Show by name">
     <button type="submit">Search</button>
@@ -18,13 +21,21 @@
         <th>Stage</th>
         <th>Genre</th>
         <th>Action</th>
+        <th>Action</th>
     </tr>
     <tr th:each="show: ${shows}">
         <td><a th:href="@{/{id}(id=${show.id})}"><span th:text="${show.title}"/></a></td>
         <td th:text="${show.stage}"/>
         <td th:text="${show.genre}"/>
-        <td><form th:action="@{/{id}(id=${show.id})}"
-                  th:method="delete"><input type="submit" value="Delete"/></form></td>
+        <td>
+            <form th:action="@{/{id}(id=${show.id})}"
+                  th:method="delete"><input type="submit" value="Delete"/></form>
+        </td>
+        <td>
+            <form th:action="@{/edit/{id}(id=${show.id})}" method="get">
+                <button type="submit">Edit</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>

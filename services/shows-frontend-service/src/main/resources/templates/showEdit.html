@@ -8,7 +8,9 @@
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
 </head>
 <body>
-<a href="/"><button>Home</button></a>
+<a href="/">
+    <button>Home</button>
+</a>
 <form th:action="@{/search}" method="get">
     <input type="text" name="searchTitle" th:value="${searchTitle}" placeholder="Find TV Show by name">
     <button type="submit">Search</button>
@@ -28,16 +30,19 @@
         <th>Poster</th>
     </tr>
     <tr>
-        <td th:text="${show.title}"/>
-        <td th:text="${show.stage}"/>
-        <td th:text="${show.genre}"/>
-        <td th:text="${show.startDate}"/>
-        <td th:text="${show.country}"/>
-        <td th:text="${show.endDate}"/>
-        <td th:text="${show.episodesCount}"/>
-        <td th:text="${show.seasonsCount}"/>
-        <td><img class="image" th:src="@{'/pictures/'+${show.id}}">
-        </td>
+        <form th:action="@{/{id}(id=${show.id})}" th:object="${show}" th:method="put">
+            <td><input type="text" name="title" th:value="${show.title}"></td>
+            <td><input type="text" name="stage" th:value="${show.stage}"></td>
+            <td><input type="text" name="genre" th:value="${show.genre}"></td>
+            <td><input type="text" name="startDate" th:value="${show.startDate}"></td>
+            <td><input type="text" name="country" th:value="${show.country}"></td>
+            <td><input type="text" name="endDate" th:value="${show.endDate}"></td>
+            <td><input type="text" name="episodesCount" th:value="${show.episodesCount}"></td>
+            <td><input type="text" name="seasonsCount" th:value="${show.seasonsCount}"></td>
+            <td>
+                <button type="submit">UPDATE</button>
+            </td>
+        </form>
     </tr>
     </tbody>
 </table>
