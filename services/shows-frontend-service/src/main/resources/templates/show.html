@@ -8,7 +8,12 @@
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
 </head>
 <body>
-<a href="/"><button>Home</button></a>
+<a href="/">
+    <button>Home</button>
+</a>
+<a href="/create">
+    <button>Add show</button>
+</a>
 <form th:action="@{/search}" method="get">
     <input type="text" name="searchTitle" th:value="${searchTitle}" placeholder="Find TV Show by name">
     <button type="submit">Search</button>
@@ -36,7 +41,7 @@
         <td th:text="${show.endDate}"/>
         <td th:text="${show.episodesCount}"/>
         <td th:text="${show.seasonsCount}"/>
-        <td><img class="image" th:src="@{'/pictures/'+${show.id}}">
+        <td><img th:src="@{'/pictures/'+${show.id}}">
         </td>
     </tr>
     </tbody>

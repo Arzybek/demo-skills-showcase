@@ -49,7 +49,7 @@ public interface ShowsDataApi {
     @PostMapping()
     @Operation(summary = "Добавление информации о сериале")
     @ResponseStatus(HttpStatus.OK)
-    ShowView createShow(@Valid @RequestBody ShowRequestDto showRequestDto);
+    UUID createShow(@Valid @RequestBody ShowRequestDto showRequestDto);
 
     @GetMapping("/{id}/image")
     @Operation(summary = "Получение постера шоу")

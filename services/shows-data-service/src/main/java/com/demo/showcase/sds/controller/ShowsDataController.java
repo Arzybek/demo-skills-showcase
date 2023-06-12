@@ -43,7 +43,7 @@ public class ShowsDataController implements ShowsDataApi {
     }
 
     @Override
-    public ShowView createShow(ShowRequestDto showRequestDto) {
+    public UUID createShow(ShowRequestDto showRequestDto) {
         return showsDataService.createShow(showRequestDto);
     }
 

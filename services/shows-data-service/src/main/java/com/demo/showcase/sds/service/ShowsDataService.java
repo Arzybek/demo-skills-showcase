@@ -41,11 +41,11 @@ public class ShowsDataService {
     }
 
     @Transactional
-    public ShowView createShow(ShowRequestDto showRequestDto) {
+    public UUID createShow(ShowRequestDto showRequestDto) {
         UUID id = UUID.randomUUID();
         ShowEntity showEntity = showsMapper.showDtoToEntity(id, showRequestDto);
         showsRepository.persist(showEntity);
-        return showsMapper.showEntityToView(showEntity);
+        return id;
     }
 
     @Transactional

@@ -11,6 +11,9 @@
 <a href="/">
     <button>Home</button>
 </a>
+<a href="/create">
+    <button>Add show</button>
+</a>
 <form th:action="@{/search}" method="get">
     <input type="text" name="searchTitle" th:value="${searchTitle}" placeholder="Find TV Show by name">
     <button type="submit">Search</button>
@@ -27,7 +30,7 @@
         <th>End date</th>
         <th>Episodes count</th>
         <th>Seasons count</th>
-        <th>Poster</th>
+        <th>Action</th>
     </tr>
     <tr>
         <form th:action="@{/{id}(id=${show.id})}" th:object="${show}" th:method="put">

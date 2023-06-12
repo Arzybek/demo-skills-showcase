@@ -21,7 +21,7 @@ public interface ShowsDataFeignClient {
     List<ShowShortInfo> getShows();
 
     @RequestMapping(method = RequestMethod.GET, value = "/shows/search")
-    List<ShowShortInfo> findShows(@RequestParam(value="title") String title);
+    List<ShowShortInfo> findShows(@RequestParam(value = "title") String title);
 
     @RequestMapping(method = RequestMethod.GET, value = "/shows/{id}")
     ShowView findShowInfoById(@PathVariable UUID id);
@@ -35,4 +35,6 @@ public interface ShowsDataFeignClient {
     @RequestMapping(method = RequestMethod.PUT, value = "/shows/{id}")
     void editShowInfoById(@PathVariable UUID id, ShowRequestDto showRequestDto);
 
+    @RequestMapping(method = RequestMethod.POST, value = "/shows")
+    UUID addShow(ShowRequestDto show);
 }

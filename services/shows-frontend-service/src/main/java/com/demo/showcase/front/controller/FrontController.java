@@ -1,5 +1,6 @@
 package com.demo.showcase.front.controller;
 
+import com.demo.showcase.common.dto.ShowRequestDto;
 import com.demo.showcase.common.dto.ShowShortInfo;
 import com.demo.showcase.common.dto.ShowView;
 import com.demo.showcase.common.dto.mapper.ShowsDtoMapper;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
@@ -70,5 +72,16 @@ public class FrontController {
         showsDataFeignClient.editShowInfoById(id, showsDtoMapper.map(show));
         model.addAttribute("show", show);
         return "show";
+    }
+
+    @PostMapping("/")
+    public String addShow(ShowRequestDto show, Model model) {
+        UUID id = showsDataFeignClient.addShow(show);
+        return "redirect:/" + id.toString();
+    }
+
+    @GetMapping("/create")
+    public String getCreatePage(Model model) {
+        return "addShow";
     }
 }
