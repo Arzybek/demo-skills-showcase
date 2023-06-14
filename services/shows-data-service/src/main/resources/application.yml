@@ -4,7 +4,7 @@ spring:
   application:
     name: shows-data-service
   datasource:
-    url: ${POSTGRES_JDBC_URL:jdbc:postgresql://localhost:5432/postgresql}
+    url: ${POSTGRES_JDBC_URL:jdbc:postgresql://localhost:5432/postgres}
     username: ${POSTGRES_USERNAME:postgres}
     password: ${POSTGRES_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver

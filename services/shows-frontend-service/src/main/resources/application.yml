@@ -5,3 +5,9 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+
+keycloak:
+  auth-server-url: http://localhost:8484/auth
+  realm: my_realm
+  resource: my_client
+  public-client: true

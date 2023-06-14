@@ -1,7 +1,8 @@
 package com.demo.showcase.common.data;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 public abstract class BaseRepository<T> {
 

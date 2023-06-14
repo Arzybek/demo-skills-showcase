@@ -3,13 +3,13 @@ package com.demo.showcase.common.data;
 import com.demo.showcase.common.dto.ShowRequestDto;
 import com.demo.showcase.common.dto.ShowShortInfo;
 import com.demo.showcase.common.dto.ShowView;
-import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import javax.persistence.Query;
 
 @Repository
 public class ShowsRepository extends BaseRepository<ShowEntity> {

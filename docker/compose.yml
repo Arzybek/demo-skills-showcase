@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: 'postgres:14-alpine'
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - ./imports/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:20.0.0
+    container_name: keycloak
+    volumes:
+      - ./imports:/opt/keycloak/data/import
+    command: ['start-dev --import-realm --http-relative-path=/auth']
+    environment:
+      KC_DB: postgres
+      KC_DB_URL_HOST: postgres
+      KC_DB_URL_PORT: 5432
+      KC_DB_URL_DATABASE: postgres
+#      KC_DB_URL: jdbc:postgresql://postgres:5432/postgres
+      KC_DB_USERNAME: postgres
+      KC_DB_PASSWORD: postgres
+      KEYCLOAK_ADMIN: admin
+      KC_DB_SCHEMA: public
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - "8484:8080"
+    depends_on:
+      - postgres
+    links:
+      - "postgres:postgres"
