@@ -1,4 +1,4 @@
-package com.demo.showcase.front.security;
+package com.demo.showcase.common.sso;
 
 import org.keycloak.adapters.springsecurity.KeycloakConfiguration;
 import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider;
@@ -12,7 +12,6 @@ import org.springframework.security.core.authority.mapping.SimpleAuthorityMapper
 import org.springframework.security.web.authentication.session.NullAuthenticatedSessionStrategy;
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 
-@Configuration
 @KeycloakConfiguration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
@@ -33,7 +32,11 @@ public class WebSecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
         http
+            .csrf().disable();
+        http
             .authorizeRequests()
+            .antMatchers("/auth/**").permitAll()
+            .antMatchers("/internal/**").permitAll()
             .anyRequest().fullyAuthenticated();
     }
 }

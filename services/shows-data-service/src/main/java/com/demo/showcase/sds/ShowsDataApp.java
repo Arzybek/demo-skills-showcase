@@ -1,5 +1,6 @@
 package com.demo.showcase.sds;
 
+import com.demo.showcase.common.sso.WebSecurityConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

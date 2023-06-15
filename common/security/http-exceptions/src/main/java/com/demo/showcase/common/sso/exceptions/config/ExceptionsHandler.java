@@ -1,6 +1,6 @@
-package com.demo.showcase.common.exceptions.config;
+package com.demo.showcase.common.sso.exceptions.config;
 
-import com.demo.showcase.common.exceptions.NotFoundException;
+import com.demo.showcase.common.sso.exceptions.NotFoundException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

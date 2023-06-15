@@ -1,4 +1,4 @@
-package com.demo.showcase.common.exceptions;
+package com.demo.showcase.common.sso.exceptions;
 
 import lombok.Getter;
 import org.zalando.problem.Status;

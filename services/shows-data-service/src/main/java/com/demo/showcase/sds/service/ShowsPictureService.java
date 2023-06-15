@@ -2,7 +2,7 @@ package com.demo.showcase.sds.service;
 
 import com.demo.showcase.common.data.ShowsPicsEntity;
 import com.demo.showcase.common.data.ShowsPicturesRepository;
-import com.demo.showcase.common.exceptions.NotFoundException;
+import com.demo.showcase.common.sso.exceptions.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.InputStreamResource;
