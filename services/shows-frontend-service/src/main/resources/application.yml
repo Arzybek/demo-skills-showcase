@@ -5,6 +5,9 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+  data:
+    rest:
+      base-path: /front
 
 keycloak:
   auth-server-url: http://localhost:8484/auth

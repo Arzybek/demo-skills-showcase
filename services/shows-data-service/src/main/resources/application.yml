@@ -24,7 +24,12 @@ spring:
 
 springdoc:
   paths-to-match:
-    - /shows/**
+    - /api/shows/**
+  swagger-ui:
+    path: /api/swagger-ui
+    url: /api/v3/api-docs
+  api-docs:
+    path: /api/v3/api-docs
 
 server:
   port: 8080

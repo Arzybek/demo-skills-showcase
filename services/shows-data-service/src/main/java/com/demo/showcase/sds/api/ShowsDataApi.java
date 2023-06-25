@@ -26,7 +26,7 @@ import javax.validation.Valid;
 @Tag(name = "Методы для работы с сериалами", description = ShowsDataApi.SHOWS_DATA_API_PATH)
 public interface ShowsDataApi {
 
-    String SHOWS_DATA_API_PATH = "/shows";
+    String SHOWS_DATA_API_PATH = "/api/shows";
 
     @GetMapping
     @Operation(summary = "Получение краткой информации о всех зарегистрированных сериалах")

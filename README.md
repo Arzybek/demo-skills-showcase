@@ -25,20 +25,21 @@ Start migration service with environment variable: POSTGRES_SCHEMA=shows \
 Start data service \
 Start frontend service \
 You're up, frontend address by default is: localhost:8081/ \
-Backend swagger is available at localhost:8080/swagger-ui.html 
+Backend swagger is available at localhost:8080/swagger-ui.html \
+Default pre configured users: admin admin; user user
 
 **Technology stack:**
 * Framework: Spring boot 2
 * Build: Maven
 * ORM: Hibernate
 * DB: postgres
-* Docker
+* Local run: Docker
 * SSO: Keycloak
 * Mapping: Mapstruct
 * Errors: zalando/problem
 * Http client: feign
 * Swagger: springdoc-openapi
-* Front: thymeleaf, bootstrap
+* Front: thymeleaf, bootstrap (pain in the ass, should've used separate front) 
 * Migrations: liquibase
 * And probabbly something else I forgot
 

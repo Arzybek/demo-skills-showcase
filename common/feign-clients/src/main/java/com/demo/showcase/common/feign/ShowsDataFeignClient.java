@@ -18,24 +18,24 @@ import java.util.UUID;
 @FeignClient(value = "showsDataClient", url = "http://localhost:8080")
 public interface ShowsDataFeignClient {
 
-    @RequestMapping(method = RequestMethod.GET, value = "/shows")
+    @RequestMapping(method = RequestMethod.GET, value = "/api/shows")
     List<ShowShortInfo> getShows(@RequestHeader("Authorization") String bearerToken);
 
-    @RequestMapping(method = RequestMethod.GET, value = "/shows/search")
+    @RequestMapping(method = RequestMethod.GET, value = "/api/shows/search")
     List<ShowShortInfo> findShows(@RequestHeader("Authorization") String bearerToken, @RequestParam(value = "title") String title);
 
-    @RequestMapping(method = RequestMethod.GET, value = "/shows/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/api/shows/{id}")
     ShowView findShowInfoById(@RequestHeader("Authorization") String bearerToken, @PathVariable UUID id);
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/shows/{id}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/api/shows/{id}")
     void deleteShowInfoById(@RequestHeader("Authorization") String bearerToken, @PathVariable UUID id);
 
-    @RequestMapping(method = RequestMethod.GET, value = "/shows/{id}/image")
+    @RequestMapping(method = RequestMethod.GET, value = "/api/shows/{id}/image")
     ResponseEntity<Resource> findPosterByShowId(@RequestHeader("Authorization") String bearerToken, @PathVariable UUID id);
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/shows/{id}")
+    @RequestMapping(method = RequestMethod.PUT, value = "/api/shows/{id}")
     void editShowInfoById(@RequestHeader("Authorization") String bearerToken, @PathVariable UUID id, ShowRequestDto showRequestDto);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/shows")
+    @RequestMapping(method = RequestMethod.POST, value = "/api/shows")
     UUID addShow(@RequestHeader("Authorization") String bearerToken, ShowRequestDto show);
 }

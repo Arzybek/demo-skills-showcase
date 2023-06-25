@@ -11,10 +11,10 @@
 <a href="/">
     <button>Home</button>
 </a>
-<a href="/create">
+<a href="/front/create">
     <button>Add show</button>
 </a>
-<form th:action="@{/search}" method="get">
+<form th:action="@{/front/search}" method="get">
     <input type="text" name="searchTitle" th:value="${searchTitle}" placeholder="Find TV Show by name">
     <button type="submit">Search</button>
 </form>
@@ -33,13 +33,13 @@
         <th>Action</th>
     </tr>
     <tr>
-        <form action="/" th:object="${show}" th:method="post">
+        <form action="/front" th:object="${show}" th:method="post">
             <td><input type="text" name="title"></td>
             <td><input type="text" name="stage"></td>
             <td><input type="text" name="genre"></td>
-            <td><input type="text" name="startDate"></td>
+            <td><input type="date" name="startDate"></td>
             <td><input type="text" name="country"></td>
-            <td><input type="text" name="endDate"></td>
+            <td><input type="date" name="endDate"></td>
             <td><input type="text" name="episodesCount"></td>
             <td><input type="text" name="seasonsCount"></td>
             <td>

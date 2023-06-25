@@ -1,6 +1,6 @@
 package com.demo.showcase.front.controller;
 
-import com.demo.showcase.common.dto.ShowRequestDto;
+import com.demo.showcase.common.dto.ShowFrontDto;
 import com.demo.showcase.common.dto.ShowShortInfo;
 import com.demo.showcase.common.dto.ShowView;
 import com.demo.showcase.common.dto.mapper.ShowsDtoMapper;
@@ -26,6 +26,8 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class FrontController {
 
+    private final static String BASE_URL = "/front";
+
     private final ShowsDataFeignClient showsDataFeignClient;
 
     private final ShowsDtoMapper showsDtoMapper;
@@ -38,53 +40,52 @@ public class FrontController {
         return "index";
     }
 
-    @GetMapping("/search")
+    @GetMapping(BASE_URL + "/search")
     public String search(Model model, String searchTitle) {
         List<ShowShortInfo> shows = showsDataFeignClient.findShows(KeycloakUtils.getBearerToken(), searchTitle);
         model.addAttribute("shows", shows);
         return "index";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(BASE_URL + "/{id}")
     public String show(@PathVariable("id") UUID id, Model model) {
         ShowView show = showsDataFeignClient.findShowInfoById(KeycloakUtils.getBearerToken(), id);
         model.addAttribute("show", show);
         return "show";
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(BASE_URL + "/{id}")
     public String delete(@PathVariable("id") UUID id, Model model) {
         showsDataFeignClient.deleteShowInfoById(KeycloakUtils.getBearerToken(), id);
         return "redirect:/";
     }
 
-    @GetMapping("/pictures/{id}")
+    @GetMapping(BASE_URL + "/pictures/{id}")
     public ResponseEntity<Resource> getPoster(@PathVariable("id") UUID id) {
         ResponseEntity<Resource> poster = showsDataFeignClient.findPosterByShowId(KeycloakUtils.getBearerToken(), id);
         return poster;
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping(BASE_URL + "/edit/{id}")
     public String getEditPage(@PathVariable("id") UUID id, Model model) {
         ShowView show = showsDataFeignClient.findShowInfoById(KeycloakUtils.getBearerToken(), id);
         model.addAttribute("show", show);
         return "showEdit";
     }
 
-    @PutMapping("/{id}")
-    public String showEdit(@PathVariable("id") UUID id, @ModelAttribute("show") ShowView show, Model model) {
+    @PutMapping(BASE_URL + "/{id}")
+    public String editShow(@PathVariable("id") UUID id, @ModelAttribute("show") ShowFrontDto show, Model model) {
         showsDataFeignClient.editShowInfoById(KeycloakUtils.getBearerToken(), id, showsDtoMapper.map(show));
-        model.addAttribute("show", show);
-        return "show";
+        return "redirect:/front/" + id.toString();
     }
 
-    @PostMapping("/")
-    public String addShow(ShowRequestDto show, Model model) {
-        UUID id = showsDataFeignClient.addShow(KeycloakUtils.getBearerToken(), show);
-        return "redirect:/" + id.toString();
+    @PostMapping(BASE_URL)
+    public String addShow(@ModelAttribute("show") ShowFrontDto show, Model model) {
+        UUID id = showsDataFeignClient.addShow(KeycloakUtils.getBearerToken(), showsDtoMapper.map(show));
+        return "redirect:/front/" + id.toString();
     }
 
-    @GetMapping("/create")
+    @GetMapping(BASE_URL + "/create")
     public String getCreatePage(Model model) {
         return "addShow";
     }

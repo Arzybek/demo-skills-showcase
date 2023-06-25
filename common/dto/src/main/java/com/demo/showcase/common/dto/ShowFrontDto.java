@@ -4,14 +4,13 @@ import com.demo.showcase.common.enums.ShowGenre;
 import com.demo.showcase.common.enums.ShowStage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
 @AllArgsConstructor
-public class ShowView {
+public class ShowFrontDto {
 
     private final UUID id;
 
@@ -21,15 +20,14 @@ public class ShowView {
 
     private final ShowGenre genre;
 
-    private final LocalDate startDate;
+    private final String startDate;
 
     private final String country;
 
-    private final LocalDate endDate;
+    private final String endDate;
 
     private final Integer episodesCount;
 
     private final Integer seasonsCount;
 
 }
-
