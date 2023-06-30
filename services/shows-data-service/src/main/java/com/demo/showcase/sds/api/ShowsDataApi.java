@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,16 +39,19 @@ public interface ShowsDataApi {
 
     @PutMapping("/{id}")
     @Operation(summary = "Изменение информации о сериале")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.OK)
     void updateShowInfo(@PathVariable UUID id, @Valid @RequestBody ShowRequestDto showRequestDto);
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Удаление информации о сериале")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.OK)
     void deleteShowInfo(@PathVariable UUID id);
 
     @PostMapping()
     @Operation(summary = "Добавление информации о сериале")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @ResponseStatus(HttpStatus.OK)
     UUID createShow(@Valid @RequestBody ShowRequestDto showRequestDto);
 

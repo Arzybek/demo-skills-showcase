@@ -6,7 +6,9 @@ import com.demo.showcase.common.dto.ShowView;
 import com.demo.showcase.common.dto.mapper.ShowsDtoMapper;
 import com.demo.showcase.common.feign.ShowsDataFeignClient;
 import com.demo.showcase.common.sso.KeycloakUtils;
+import com.demo.showcase.common.sso.Role;
 import lombok.RequiredArgsConstructor;
+import org.keycloak.models.AdminRoles;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -35,9 +37,15 @@ public class FrontController {
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/")
     public String index(Model model) {
-        List<ShowShortInfo> shows = showsDataFeignClient.getShows(KeycloakUtils.getBearerToken());
-        model.addAttribute("shows", shows);
-        return "index";
+        if (KeycloakUtils.getRole() == Role.ADMIN) {
+            List<ShowShortInfo> shows = showsDataFeignClient.getShows(KeycloakUtils.getBearerToken());
+            model.addAttribute("shows", shows);
+            return "index";
+        } else {
+            List<ShowShortInfo> shows = showsDataFeignClient.getShows(KeycloakUtils.getBearerToken());
+            model.addAttribute("shows", shows);
+            return "indexUser";
+        }
     }
 
     @GetMapping(BASE_URL + "/search")
@@ -55,6 +63,7 @@ public class FrontController {
     }
 
     @DeleteMapping(BASE_URL + "/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String delete(@PathVariable("id") UUID id, Model model) {
         showsDataFeignClient.deleteShowInfoById(KeycloakUtils.getBearerToken(), id);
         return "redirect:/";
@@ -67,6 +76,7 @@ public class FrontController {
     }
 
     @GetMapping(BASE_URL + "/edit/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String getEditPage(@PathVariable("id") UUID id, Model model) {
         ShowView show = showsDataFeignClient.findShowInfoById(KeycloakUtils.getBearerToken(), id);
         model.addAttribute("show", show);
@@ -74,18 +84,21 @@ public class FrontController {
     }
 
     @PutMapping(BASE_URL + "/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String editShow(@PathVariable("id") UUID id, @ModelAttribute("show") ShowFrontDto show, Model model) {
         showsDataFeignClient.editShowInfoById(KeycloakUtils.getBearerToken(), id, showsDtoMapper.map(show));
         return "redirect:/front/" + id.toString();
     }
 
     @PostMapping(BASE_URL)
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String addShow(@ModelAttribute("show") ShowFrontDto show, Model model) {
         UUID id = showsDataFeignClient.addShow(KeycloakUtils.getBearerToken(), showsDtoMapper.map(show));
         return "redirect:/front/" + id.toString();
     }
 
     @GetMapping(BASE_URL + "/create")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public String getCreatePage(Model model) {
         return "addShow";
     }

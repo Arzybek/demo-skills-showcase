@@ -33,12 +33,11 @@ public class WebSecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
         super.configure(http);
         http.csrf()
             .disable();
-        http.requestMatchers()
-            .antMatchers("/api/shows/**", "/**")
-            .and()
-            .authorizeRequests()
+        http.authorizeRequests()
+            .antMatchers("/api/shows/**")
+            .authenticated()
             .anyRequest()
-            .fullyAuthenticated();
+            .permitAll();
     }
 
     @Override
