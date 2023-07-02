@@ -95,4 +95,20 @@
         <addNotNullConstraint tableName="shows" columnName="is_deleted"/>
     </changeSet>
 
+    <changeSet id="0.0.1-8" author="kat">
+        <createTable tableName="users_shows">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+            <column name="show_id" type="uuid">
+                <constraints nullable="false" foreignKeyName="fk_user_show" references="shows(id)"/>
+            </column>
+            <column name="seasons_watched" type="integer"/>
+            <column name="episodes_watched" type="integer"/>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>

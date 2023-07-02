@@ -11,6 +11,9 @@
 <a href="/">
     <button>Home</button>
 </a>
+<a href="/front/create">
+    <button>Add show</button>
+</a>
 <form th:action="@{/front/search}" method="get">
     <input type="text" name="searchTitle" th:value="${searchTitle}" placeholder="Find TV Show by name">
     <button type="submit">Search</button>
@@ -23,14 +26,21 @@
         <th>Stage</th>
         <th>Genre</th>
         <th>Action</th>
+        <th>Action</th>
     </tr>
     <tr th:each="show: ${shows}">
         <td><a th:href="@{/front/{id}(id=${show.id})}"><span th:text="${show.title}"/></a></td>
         <td th:text="${show.stage}"/>
         <td th:text="${show.genre}"/>
-        <td><form th:action="@{/front/users/add/{id}(id=${show.id})}" method="get">
-            <button type="submit">Add</button>
-        </form></td>
+        <td>
+            <form th:action="@{/front/{id}(id=${show.id})}"
+                  th:method="delete"><input type="submit" value="Delete"/></form>
+        </td>
+        <td>
+            <form th:action="@{/front/edit/{id}(id=${show.id})}" method="get">
+                <button type="submit">Edit</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>

@@ -20,17 +20,20 @@
     <tbody>
     <tr>
         <th>Title</th>
-        <th>Stage</th>
-        <th>Genre</th>
+        <th>Episodes watched</th>
+        <th>Seasons watched</th>
         <th>Action</th>
     </tr>
-    <tr th:each="show: ${shows}">
-        <td><a th:href="@{/front/{id}(id=${show.id})}"><span th:text="${show.title}"/></a></td>
-        <td th:text="${show.stage}"/>
-        <td th:text="${show.genre}"/>
-        <td><form th:action="@{/front/users/add/{id}(id=${show.id})}" method="get">
-            <button type="submit">Add</button>
-        </form></td>
+    <tr>
+        <form th:action="@{/front/users/add/{id}(id=${show.id})}" th:object="${request}" th:method="post">
+            <td style="display:none;"><input type="text" name="showId" th:value="${show.id}"></td>
+            <td><p th:text="${show.title}"></p></td>
+            <td><input type="text" name="episodesWatched"></td>
+            <td><input type="text" name="seasonsWatched"></td>
+            <td>
+                <button type="submit">Add</button>
+            </td>
+        </form>
     </tr>
     </tbody>
 </table>

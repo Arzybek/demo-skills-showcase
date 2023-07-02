@@ -45,5 +45,8 @@ Default pre configured users: admin admin; user user
 
 -----
 **PICTURES:**\
-![Main page](/pictures/1.jpg)
-
+![Main page](/pictures/1.jpg)  
+![Edit page](/pictures/2.jpg)  
+![Users page](/pictures/3.jpg)  
+![Users add show page](/pictures/4.jpg)  
+![Swagger](/pictures/5.jpg)  

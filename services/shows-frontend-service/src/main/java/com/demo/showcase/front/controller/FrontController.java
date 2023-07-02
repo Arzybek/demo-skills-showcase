@@ -1,14 +1,15 @@
 package com.demo.showcase.front.controller;
 
+import com.demo.showcase.common.dto.AddShowRequest;
 import com.demo.showcase.common.dto.ShowFrontDto;
 import com.demo.showcase.common.dto.ShowShortInfo;
 import com.demo.showcase.common.dto.ShowView;
 import com.demo.showcase.common.dto.mapper.ShowsDtoMapper;
 import com.demo.showcase.common.feign.ShowsDataFeignClient;
+import com.demo.showcase.common.feign.UsersShowsFeignClient;
 import com.demo.showcase.common.sso.KeycloakUtils;
 import com.demo.showcase.common.sso.Role;
 import lombok.RequiredArgsConstructor;
-import org.keycloak.models.AdminRoles;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,6 +32,8 @@ public class FrontController {
     private final static String BASE_URL = "/front";
 
     private final ShowsDataFeignClient showsDataFeignClient;
+
+    private final UsersShowsFeignClient usersShowsFeignClient;
 
     private final ShowsDtoMapper showsDtoMapper;
 
@@ -60,6 +63,19 @@ public class FrontController {
         ShowView show = showsDataFeignClient.findShowInfoById(KeycloakUtils.getBearerToken(), id);
         model.addAttribute("show", show);
         return "show";
+    }
+
+    @GetMapping(BASE_URL + "/users/add/{id}")
+    public String addShowUserPage(@PathVariable("id") UUID id, Model model) {
+        ShowView show = showsDataFeignClient.findShowInfoById(KeycloakUtils.getBearerToken(), id);
+        model.addAttribute("show", show);
+        return "addShowUser";
+    }
+
+    @PostMapping(BASE_URL + "/users/add/{id}")
+    public String addShowUser(@PathVariable("id") UUID id, @ModelAttribute("request") AddShowRequest addShowRequest, Model model) {
+        UUID recordId = usersShowsFeignClient.addShow(KeycloakUtils.getBearerToken(), addShowRequest);
+        return "redirect:/";
     }
 
     @DeleteMapping(BASE_URL + "/{id}")
