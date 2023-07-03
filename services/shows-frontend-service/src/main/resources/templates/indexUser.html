@@ -11,6 +11,9 @@
 <a href="/">
     <button>Home</button>
 </a>
+<a href="/myShows">
+    <button>My shows</button>
+</a>
 <form th:action="@{/front/search}" method="get">
     <input type="text" name="searchTitle" th:value="${searchTitle}" placeholder="Find TV Show by name">
     <button type="submit">Search</button>

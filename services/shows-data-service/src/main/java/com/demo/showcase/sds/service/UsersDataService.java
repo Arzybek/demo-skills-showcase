@@ -4,6 +4,7 @@ import com.demo.showcase.common.data.ShowsRepository;
 import com.demo.showcase.common.data.UserShowsEntity;
 import com.demo.showcase.common.data.UserShowsRepository;
 import com.demo.showcase.common.dto.AddShowRequest;
+import com.demo.showcase.common.dto.GetUserShowsResponse;
 import com.demo.showcase.common.sso.KeycloakUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -33,4 +35,7 @@ public class UsersDataService {
         return id;
     }
 
+    public List<GetUserShowsResponse> getUserShows() {
+        return repository.getUserShows(KeycloakUtils.getUserId());
+    }
 }

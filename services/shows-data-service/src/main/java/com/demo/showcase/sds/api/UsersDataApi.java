@@ -1,6 +1,7 @@
 package com.demo.showcase.sds.api;
 
 import com.demo.showcase.common.dto.AddShowRequest;
+import com.demo.showcase.common.dto.GetUserShowsResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.util.List;
 import java.util.UUID;
 import javax.validation.Valid;
 
@@ -26,10 +28,10 @@ public interface UsersDataApi {
     @ResponseStatus(HttpStatus.OK)
     UUID addShow(@Valid @RequestBody AddShowRequest addShowRequest);
 
-//    @GetMapping
-//    @Operation(summary = "Получение информации о сериалах")
-//    @PreAuthorize("hasAnyRole('USER')")
-//    @ResponseStatus(HttpStatus.OK)
-//    UUID myShows(@Valid @RequestBody AddShowRequest addShowRequest);
+    @GetMapping
+    @Operation(summary = "Получение информации о сериалах")
+    @PreAuthorize("hasAnyRole('USER')")
+    @ResponseStatus(HttpStatus.OK)
+    List<GetUserShowsResponse> myShows();
 
 }

@@ -1,6 +1,7 @@
 package com.demo.showcase.front.controller;
 
 import com.demo.showcase.common.dto.AddShowRequest;
+import com.demo.showcase.common.dto.GetUserShowsResponse;
 import com.demo.showcase.common.dto.ShowFrontDto;
 import com.demo.showcase.common.dto.ShowShortInfo;
 import com.demo.showcase.common.dto.ShowView;
@@ -73,9 +74,19 @@ public class FrontController {
     }
 
     @PostMapping(BASE_URL + "/users/add/{id}")
-    public String addShowUser(@PathVariable("id") UUID id, @ModelAttribute("request") AddShowRequest addShowRequest, Model model) {
+    public String addShowUser(@PathVariable("id") UUID id,
+                              @ModelAttribute("request") AddShowRequest addShowRequest,
+                              Model model) {
         UUID recordId = usersShowsFeignClient.addShow(KeycloakUtils.getBearerToken(), addShowRequest);
         return "redirect:/";
+    }
+
+    @PreAuthorize("hasAnyRole('USER')")
+    @GetMapping("/myShows")
+    public String myShows(Model model) {
+        List<GetUserShowsResponse> shows = usersShowsFeignClient.getUserShows(KeycloakUtils.getBearerToken());
+        model.addAttribute("shows", shows);
+        return "myShows";
     }
 
     @DeleteMapping(BASE_URL + "/{id}")

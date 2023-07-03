@@ -1,7 +1,7 @@
 # Demo-skills-showcase
 
 Demo project for skills demonstration \
-**About project:** TV shows list type of website with complex backend. \
+**About project:** TV shows list type of website with complex backend (microservices architecture) \
 **Structure:**
 * services\
   Contains backend services
@@ -15,6 +15,7 @@ Demo project for skills demonstration \
   Contains common shared configurations, sources and e.t.c.
     * data
     * enums
+    * ...
 * docker \
   Contains docker-compose run files for easy running 
 
@@ -25,8 +26,8 @@ Start migration service with environment variable: POSTGRES_SCHEMA=shows \
 Start data service \
 Start frontend service \
 You're up, frontend address by default is: localhost:8081/ \
-Backend swagger is available at localhost:8080/swagger-ui.html \
-Default pre configured users: admin admin; user user
+Backend swagger is available at localhost:8080/swagger-ui/index.html \
+Default pre configured users: `admin admin`; `user user`
 
 **Technology stack:**
 * Framework: Spring boot 2
@@ -44,9 +45,17 @@ Default pre configured users: admin admin; user user
 * And probabbly something else I forgot
 
 -----
-**PICTURES:**\
-![Main page](/pictures/1.jpg)  
-![Edit page](/pictures/2.jpg)  
-![Users page](/pictures/3.jpg)  
-![Users add show page](/pictures/4.jpg)  
-![Swagger](/pictures/5.jpg)  
+**PICTURES (some might be outdated but won't redo screenshots):**
+| ![Main page](/pictures/1.jpg "Main page") | 
+| :--: |
+| *Main page* |
+| ![Edit page](/pictures/2.jpg "Edit page") |
+| *Edit page* |
+| ![Users page](/pictures/3.jpg "Users page") |
+| *Users page* |
+| ![Users add show page](/pictures/4.jpg "Users add show page") |
+| *Users add show page* |
+| ![Swagger](/pictures/5.jpg "Swagger") |
+| *Swagger* |
+| ![Users added shows page](/pictures/6.jpg "Users added shows page") |
+| *Users added shows page* |  
