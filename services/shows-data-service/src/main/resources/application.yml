@@ -22,15 +22,6 @@ spring:
       hibernate.default_schema: shows
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
 
-springdoc:
-  paths-to-match:
-    - /api/**
-  swagger-ui:
-    path: /swagger-ui
-    url: /v3/api-docs
-  api-docs:
-    path: /v3/api-docs
-
 server:
   port: 8080
   error:

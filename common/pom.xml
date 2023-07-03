@@ -18,6 +18,7 @@
         <module>feign-clients</module>
         <module>dto</module>
         <module>security</module>
+        <module>openapi</module>
     </modules>
 
     <dependencies>

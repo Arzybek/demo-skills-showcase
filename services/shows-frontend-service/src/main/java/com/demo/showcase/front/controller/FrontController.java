@@ -82,7 +82,7 @@ public class FrontController {
     }
 
     @PreAuthorize("hasAnyRole('USER')")
-    @GetMapping("/myShows")
+    @GetMapping(BASE_URL + "/myShows")
     public String myShows(Model model) {
         List<GetUserShowsResponse> shows = usersShowsFeignClient.getUserShows(KeycloakUtils.getBearerToken());
         model.addAttribute("shows", shows);
