@@ -38,4 +38,7 @@ public class UserShowsEntity {
     @Column(name = "episodes_watched")
     private Integer episodesWatched;
 
+    @Column(name = "is_deleted")
+    private boolean isDeleted;
+
 }

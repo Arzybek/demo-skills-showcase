@@ -13,12 +13,12 @@ Backend swagger is available at localhost:8080/swagger-ui/index.html \
 Default pre configured users: `admin admin`; `user user`  
 
 -----
-**PICTURES (some might be outdated but won't redo screenshots):**
-| ![Main page](/pictures/1.jpg "Main page") | 
+**PICTURES (some might be outdated):**
+| ![Main page (admin)](/pictures/1.jpg "Main page (admin)") | 
 | :--: |
-| *Main page* |
-| ![Edit page](/pictures/2.jpg "Edit page") |
-| *Edit page* |
+| *Main page (admin)* |
+| ![Edit page (admin)](/pictures/2.jpg "Edit page (admin)") |
+| *Edit page (admin)* |
 | ![Users page](/pictures/3.jpg "Users page") |
 | *Users page* |
 | ![Users add show page](/pictures/4.jpg "Users add show page") |

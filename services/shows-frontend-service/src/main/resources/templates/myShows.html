@@ -25,16 +25,16 @@
         <th>Show</th>
         <th>Seasons watched</th>
         <th>Episodes watched</th>
-<!--        <th>Action</th>-->
+        <th>Action</th>
     </tr>
-    <tr th:each="show: ${shows}">
-        <td><a th:href="@{/front/{id}(id=${show.showId})}"><span th:text="${show.showTitle}"/></a></td>
-        <td th:text="${show.seasonsWatched}"/>
-        <td th:text="${show.episodesWatched}"/>
-<!--        <td>-->
-<!--            <form th:action="@{/front/{id}(id=${show.id})}"-->
-<!--                  th:method="delete"><input type="submit" value="Delete"/></form>-->
-<!--        </td>-->
+    <tr th:each="record: ${records}">
+        <td><a th:href="@{/front/{id}(id=${record.showId})}"><span th:text="${record.showTitle}"/></a></td>
+        <td th:text="${record.seasonsWatched}"/>
+        <td th:text="${record.episodesWatched}"/>
+        <td>
+            <form th:action="@{/front/myShows/{id}(id=${record.id})}"
+                  th:method="delete"><input type="submit" value="Delete"/></form>
+        </td>
     </tr>
     </tbody>
 </table>

@@ -11,12 +11,19 @@ public class UserShowsRepository extends BaseRepository<UserShowsEntity> {
 
     public List<GetUserShowsResponse> getUserShows(UUID userId) {
         return em.createQuery("""
-                              select new com.demo.showcase.common.dto.GetUserShowsResponse(u.showId, s.title, u.seasonsWatched, u.episodesWatched)
+                              select new com.demo.showcase.common.dto.GetUserShowsResponse(u.id, u.showId, s.title, u.seasonsWatched, u.episodesWatched)
                               from UserShowsEntity u
                               inner join ShowEntity s on u.showId = s.id 
-                              where u.userId = :userId
+                              where u.userId = :userId and u.isDeleted = false
                               """, GetUserShowsResponse.class)
                  .setParameter("userId", userId)
                  .getResultList();
     }
+
+    public void deactualizeById(UUID id) {
+        em.createQuery("update UserShowsEntity u set u.isDeleted = true where u.id = :id")
+          .setParameter("id", id)
+          .executeUpdate();
+    }
+
 }

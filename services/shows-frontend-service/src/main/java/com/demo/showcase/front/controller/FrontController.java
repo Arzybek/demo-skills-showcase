@@ -84,9 +84,16 @@ public class FrontController {
     @PreAuthorize("hasAnyRole('USER')")
     @GetMapping(BASE_URL + "/myShows")
     public String myShows(Model model) {
-        List<GetUserShowsResponse> shows = usersShowsFeignClient.getUserShows(KeycloakUtils.getBearerToken());
-        model.addAttribute("shows", shows);
+        List<GetUserShowsResponse> records = usersShowsFeignClient.getUserShows(KeycloakUtils.getBearerToken());
+        model.addAttribute("records", records);
         return "myShows";
+    }
+
+    @DeleteMapping(BASE_URL + "/myShows/{id}")
+    @PreAuthorize("hasAnyRole('USER')")
+    public String deleteUserShow(@PathVariable("id") UUID id, Model model) {
+        usersShowsFeignClient.deleteShowRecordById(KeycloakUtils.getBearerToken(), id);
+        return "redirect:/front/myShows";
     }
 
     @DeleteMapping(BASE_URL + "/{id}")

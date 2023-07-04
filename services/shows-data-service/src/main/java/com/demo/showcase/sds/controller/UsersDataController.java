@@ -27,4 +27,9 @@ public class UsersDataController implements UsersDataApi {
         return usersDataService.getUserShows();
     }
 
+    @Override
+    public void deleteUserShowInfo(UUID id) {
+        usersDataService.deleteUserShow(id);
+    }
+
 }
