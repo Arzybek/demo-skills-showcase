@@ -1,7 +1,8 @@
 package com.demo.showcase.sds.api;
 
-import com.demo.showcase.common.dto.AddShowRequest;
+import com.demo.showcase.common.dto.UsersShowRequest;
 import com.demo.showcase.common.dto.GetUserShowsResponse;
+import com.demo.showcase.common.dto.ShowRequestDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -28,7 +30,7 @@ public interface UsersDataApi {
     @Operation(summary = "Добавление информации о просмотре сериала")
     @PreAuthorize("hasAnyRole('USER')")
     @ResponseStatus(HttpStatus.OK)
-    UUID addShow(@Valid @RequestBody AddShowRequest addShowRequest);
+    UUID addShow(@Valid @RequestBody UsersShowRequest usersShowRequest);
 
     @GetMapping
     @Operation(summary = "Получение информации о сериалах")
@@ -41,5 +43,11 @@ public interface UsersDataApi {
     @PreAuthorize("hasAnyRole('USER')")
     @ResponseStatus(HttpStatus.OK)
     void deleteUserShowInfo(@PathVariable UUID id);
+
+    @PutMapping("/{showId}")
+    @Operation(summary = "Изменение информации о просмотре сериала")
+    @PreAuthorize("hasAnyRole('USER')")
+    @ResponseStatus(HttpStatus.OK)
+    void updateShowInfo(@PathVariable UUID showId, @Valid @RequestBody UsersShowRequest usersShowRequest);
 
 }

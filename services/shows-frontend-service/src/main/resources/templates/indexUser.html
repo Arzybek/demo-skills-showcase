@@ -31,7 +31,7 @@
         <td><a th:href="@{/front/{id}(id=${show.id})}"><span th:text="${show.title}"/></a></td>
         <td th:text="${show.stage}"/>
         <td th:text="${show.genre}"/>
-        <td><form th:action="@{/front/users/add/{id}(id=${show.id})}" method="get">
+        <td><form th:action="@{/front/users/shows/{id}(id=${show.id})}" method="get">
             <button type="submit">Add</button>
         </form></td>
     </tr>

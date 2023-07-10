@@ -1,6 +1,8 @@
 package com.demo.showcase.common.sso.exceptions.config;
 
+import com.demo.showcase.common.sso.exceptions.BaseException;
 import com.demo.showcase.common.sso.exceptions.NotFoundException;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -25,6 +27,11 @@ public class ExceptionsHandler implements ProblemHandling, HandlerAdvice {
     @Override
     public boolean isCausalChainsEnabled() {
         return false;
+    }
+
+    @ExceptionHandler(BaseException.class)
+    public ResponseEntity<Problem> handleBaseException(BaseException exception, NativeWebRequest request) {
+        return create(exception.getHttpStatus(), exception.getMessage(), request);
     }
 
     @ExceptionHandler(NotFoundException.class)

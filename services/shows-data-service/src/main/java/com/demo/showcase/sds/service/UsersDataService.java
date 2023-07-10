@@ -2,7 +2,7 @@ package com.demo.showcase.sds.service;
 
 import com.demo.showcase.common.data.UserShowsEntity;
 import com.demo.showcase.common.data.UserShowsRepository;
-import com.demo.showcase.common.dto.AddShowRequest;
+import com.demo.showcase.common.dto.UsersShowRequest;
 import com.demo.showcase.common.dto.GetUserShowsResponse;
 import com.demo.showcase.common.sso.KeycloakUtils;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +20,11 @@ public class UsersDataService {
 
     private final UserShowsRepository repository;
 
+    private final UserShowsFlcService flcService;
+
     @Transactional
-    public UUID addShow(AddShowRequest request){
+    public UUID addShow(UsersShowRequest request){
+        flcService.checkShowDoesntExist(request.getShowId());
         UUID id = UUID.randomUUID();
         UserShowsEntity userShowsEntity = new UserShowsEntity();
         userShowsEntity.setId(id);
@@ -40,5 +43,11 @@ public class UsersDataService {
     @Transactional
     public void deleteUserShow(UUID id) {
         repository.deactualizeById(id);
+    }
+
+    @Transactional
+    public void updateShowInfo(UUID showId, UsersShowRequest usersShowRequest) {
+        flcService.checkShowExists(showId);
+        repository.updateShowInfo(KeycloakUtils.getUserId(), showId, usersShowRequest);
     }
 }

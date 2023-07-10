@@ -29,8 +29,15 @@
     </tr>
     <tr th:each="record: ${records}">
         <td><a th:href="@{/front/{id}(id=${record.showId})}"><span th:text="${record.showTitle}"/></a></td>
-        <td th:text="${record.seasonsWatched}"/>
-        <td th:text="${record.episodesWatched}"/>
+
+        <form th:action="@{/front/users/shows/{id}(id=${record.showId})}" th:object="${request}" th:method="put">
+            <td style="display:none;"><input type="text" name="showId" th:value="${record.showId}"></td>
+            <td><input type="text" name="episodesWatched" th:value="${record.episodesWatched}"></td>
+            <td><input type="text" name="seasonsWatched" th:value="${record.seasonsWatched}"></td>
+            <td>
+                <button type="submit">Update</button>
+            </td>
+        </form>
         <td>
             <form th:action="@{/front/myShows/{id}(id=${record.id})}"
                   th:method="delete"><input type="submit" value="Delete"/></form>

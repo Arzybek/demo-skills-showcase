@@ -1,6 +1,6 @@
 package com.demo.showcase.front.controller;
 
-import com.demo.showcase.common.dto.AddShowRequest;
+import com.demo.showcase.common.dto.UsersShowRequest;
 import com.demo.showcase.common.dto.GetUserShowsResponse;
 import com.demo.showcase.common.dto.ShowFrontDto;
 import com.demo.showcase.common.dto.ShowShortInfo;
@@ -66,18 +66,26 @@ public class FrontController {
         return "show";
     }
 
-    @GetMapping(BASE_URL + "/users/add/{id}")
+    @GetMapping(BASE_URL + "/users/shows/{id}")
     public String addShowUserPage(@PathVariable("id") UUID id, Model model) {
         ShowView show = showsDataFeignClient.findShowInfoById(KeycloakUtils.getBearerToken(), id);
         model.addAttribute("show", show);
         return "addShowUser";
     }
 
-    @PostMapping(BASE_URL + "/users/add/{id}")
+    @PostMapping(BASE_URL + "/users/shows/{id}")
     public String addShowUser(@PathVariable("id") UUID id,
-                              @ModelAttribute("request") AddShowRequest addShowRequest,
+                              @ModelAttribute("request") UsersShowRequest usersShowRequest,
                               Model model) {
-        UUID recordId = usersShowsFeignClient.addShow(KeycloakUtils.getBearerToken(), addShowRequest);
+        UUID recordId = usersShowsFeignClient.addShow(KeycloakUtils.getBearerToken(), usersShowRequest);
+        return "redirect:/";
+    }
+
+    @PutMapping(BASE_URL + "/users/shows/{id}")
+    public String updateShowUser(@PathVariable("id") UUID id,
+                              @ModelAttribute("request") UsersShowRequest usersShowRequest,
+                              Model model) {
+        usersShowsFeignClient.updateShow(KeycloakUtils.getBearerToken(), usersShowRequest.getShowId(), usersShowRequest);
         return "redirect:/";
     }
 

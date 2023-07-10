@@ -25,7 +25,7 @@
         <th>Action</th>
     </tr>
     <tr>
-        <form th:action="@{/front/users/add/{id}(id=${show.id})}" th:object="${request}" th:method="post">
+        <form th:action="@{/front/users/shows/{id}(id=${show.id})}" th:object="${request}" th:method="post">
             <td style="display:none;"><input type="text" name="showId" th:value="${show.id}"></td>
             <td><p th:text="${show.title}"></p></td>
             <td><input type="text" name="episodesWatched"></td>

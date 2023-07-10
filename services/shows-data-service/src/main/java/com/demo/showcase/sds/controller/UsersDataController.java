@@ -1,6 +1,6 @@
 package com.demo.showcase.sds.controller;
 
-import com.demo.showcase.common.dto.AddShowRequest;
+import com.demo.showcase.common.dto.UsersShowRequest;
 import com.demo.showcase.common.dto.GetUserShowsResponse;
 import com.demo.showcase.sds.api.UsersDataApi;
 import com.demo.showcase.sds.service.UsersDataService;
@@ -18,8 +18,8 @@ public class UsersDataController implements UsersDataApi {
 
 
     @Override
-    public UUID addShow(AddShowRequest addShowRequest) {
-        return usersDataService.addShow(addShowRequest);
+    public UUID addShow(UsersShowRequest usersShowRequest) {
+        return usersDataService.addShow(usersShowRequest);
     }
 
     @Override
@@ -30,6 +30,11 @@ public class UsersDataController implements UsersDataApi {
     @Override
     public void deleteUserShowInfo(UUID id) {
         usersDataService.deleteUserShow(id);
+    }
+
+    @Override
+    public void updateShowInfo(UUID showId, UsersShowRequest usersShowRequest) {
+        usersDataService.updateShowInfo(showId, usersShowRequest);
     }
 
 }
