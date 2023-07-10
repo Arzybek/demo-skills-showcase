@@ -26,7 +26,7 @@ public class UserShowsRepository extends BaseRepository<UserShowsEntity> {
 
     public List<GetUserShowsResponse> getUserShows(UUID userId) {
         return em.createQuery("""
-                              select new com.demo.showcase.common.dto.GetUserShowsResponse(u.id, u.showId, s.title, u.seasonsWatched, u.episodesWatched)
+                              select new com.demo.showcase.common.dto.GetUserShowsResponse(u.id, u.showId, s.title, u.seasonsWatched, u.episodesWatched, s.seasonsCount, s.episodesCount)
                               from UserShowsEntity u
                               inner join ShowEntity s on u.showId = s.id 
                               where u.userId = :userId and u.isDeleted = false
@@ -56,7 +56,7 @@ public class UserShowsRepository extends BaseRepository<UserShowsEntity> {
             params.put("se", dto.getSeasonsWatched());
         }
         querySb.append(" where u.showId =:showId");
-        querySb.append(" and u.userId =: userId");
+        querySb.append(" and u.userId =: userId and u.isDeleted = false");
         params.put("showId", showId);
         params.put("userId", userId);
 

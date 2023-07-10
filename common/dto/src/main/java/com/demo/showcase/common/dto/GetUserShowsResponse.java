@@ -19,4 +19,8 @@ public class GetUserShowsResponse {
 
     private Integer episodesWatched;
 
+    private Integer seasonsCount;
+
+    private Integer episodesCount;
+
 }

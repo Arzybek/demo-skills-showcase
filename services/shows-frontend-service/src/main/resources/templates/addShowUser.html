@@ -28,8 +28,8 @@
         <form th:action="@{/front/users/shows/{id}(id=${show.id})}" th:object="${request}" th:method="post">
             <td style="display:none;"><input type="text" name="showId" th:value="${show.id}"></td>
             <td><p th:text="${show.title}"></p></td>
-            <td><input type="text" name="episodesWatched"></td>
-            <td><input type="text" name="seasonsWatched"></td>
+            <td><input type="text" name="episodesWatched"><div>/<th:block th:text="${show.episodesCount}"></th:block></div></td>
+            <td><input type="text" name="seasonsWatched"><div>/<th:block th:text="${show.seasonsCount}"></th:block></div></td>
             <td>
                 <button type="submit">Add</button>
             </td>

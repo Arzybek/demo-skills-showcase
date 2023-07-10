@@ -23,8 +23,8 @@
     <tbody>
     <tr>
         <th>Show</th>
-        <th>Seasons watched</th>
         <th>Episodes watched</th>
+        <th>Seasons watched</th>
         <th>Action</th>
     </tr>
     <tr th:each="record: ${records}">
@@ -32,8 +32,10 @@
 
         <form th:action="@{/front/users/shows/{id}(id=${record.showId})}" th:object="${request}" th:method="put">
             <td style="display:none;"><input type="text" name="showId" th:value="${record.showId}"></td>
-            <td><input type="text" name="episodesWatched" th:value="${record.episodesWatched}"></td>
-            <td><input type="text" name="seasonsWatched" th:value="${record.seasonsWatched}"></td>
+            <td><input type="text" name="episodesWatched" th:value="${record.episodesWatched}"><div>/<th:block
+                    th:text="${record.episodesCount}"></th:block></div></td>
+            <td><input type="text" name="seasonsWatched" th:value="${record.seasonsWatched}"><div>/<th:block
+                    th:text="${record.seasonsCount}"></th:block></div></td>
             <td>
                 <button type="submit">Update</button>
             </td>
