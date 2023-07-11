@@ -10,4 +10,8 @@ public class ForbiddenException extends BaseException {
         super(Status.FORBIDDEN, FORBIDDEN_MSG);
     }
 
+    public ForbiddenException(String message) {
+        super(Status.FORBIDDEN, message);
+    }
+
 }

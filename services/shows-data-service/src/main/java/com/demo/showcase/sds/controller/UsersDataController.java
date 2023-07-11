@@ -16,7 +16,6 @@ public class UsersDataController implements UsersDataApi {
 
     private final UsersDataService usersDataService;
 
-
     @Override
     public UUID addShow(UsersShowRequest usersShowRequest) {
         return usersDataService.addShow(usersShowRequest);

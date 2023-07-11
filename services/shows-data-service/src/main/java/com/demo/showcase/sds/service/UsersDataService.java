@@ -25,15 +25,10 @@ public class UsersDataService {
     @Transactional
     public UUID addShow(UsersShowRequest request){
         flcService.checkShowDoesntExist(request.getShowId());
-        UUID id = UUID.randomUUID();
-        UserShowsEntity userShowsEntity = new UserShowsEntity();
-        userShowsEntity.setId(id);
-        userShowsEntity.setUserId(KeycloakUtils.getUserId());
-        userShowsEntity.setShowId(request.getShowId());
-        userShowsEntity.setEpisodesWatched(request.getEpisodesWatched());
-        userShowsEntity.setSeasonsWatched(request.getSeasonsWatched());
+        flcService.checkShowsEpisodesAndSeasons(request);
+        UserShowsEntity userShowsEntity = createEntity(request);
         repository.persist(userShowsEntity);
-        return id;
+        return userShowsEntity.getId();
     }
 
     public List<GetUserShowsResponse> getUserShows() {
@@ -48,6 +43,19 @@ public class UsersDataService {
     @Transactional
     public void updateShowInfo(UUID showId, UsersShowRequest usersShowRequest) {
         flcService.checkShowExists(showId);
+        flcService.checkShowsEpisodesAndSeasons(usersShowRequest);
         repository.updateShowInfo(KeycloakUtils.getUserId(), showId, usersShowRequest);
     }
+
+    private UserShowsEntity createEntity(UsersShowRequest request){
+        UUID id = UUID.randomUUID();
+        UserShowsEntity userShowsEntity = new UserShowsEntity();
+        userShowsEntity.setId(id);
+        userShowsEntity.setUserId(KeycloakUtils.getUserId());
+        userShowsEntity.setShowId(request.getShowId());
+        userShowsEntity.setEpisodesWatched(request.getEpisodesWatched());
+        userShowsEntity.setSeasonsWatched(request.getSeasonsWatched());
+        return userShowsEntity;
+    }
+
 }

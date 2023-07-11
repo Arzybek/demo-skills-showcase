@@ -1,15 +1,16 @@
 package com.demo.showcase.front.controller;
 
-import com.demo.showcase.common.dto.UsersShowRequest;
 import com.demo.showcase.common.dto.GetUserShowsResponse;
 import com.demo.showcase.common.dto.ShowFrontDto;
 import com.demo.showcase.common.dto.ShowShortInfo;
 import com.demo.showcase.common.dto.ShowView;
+import com.demo.showcase.common.dto.UsersShowRequest;
 import com.demo.showcase.common.dto.mapper.ShowsDtoMapper;
 import com.demo.showcase.common.feign.ShowsDataFeignClient;
 import com.demo.showcase.common.feign.UsersShowsFeignClient;
 import com.demo.showcase.common.sso.KeycloakUtils;
 import com.demo.showcase.common.sso.Role;
+import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
@@ -77,16 +78,24 @@ public class FrontController {
     public String addShowUser(@PathVariable("id") UUID id,
                               @ModelAttribute("request") UsersShowRequest usersShowRequest,
                               Model model) {
-        UUID recordId = usersShowsFeignClient.addShow(KeycloakUtils.getBearerToken(), usersShowRequest);
-        return "redirect:/";
+        try {
+            UUID recordId = usersShowsFeignClient.addShow(KeycloakUtils.getBearerToken(), usersShowRequest);
+            return "redirect:/";
+        } catch (FeignException e) {
+            return handleFeignException(model, e);
+        }
     }
 
     @PutMapping(BASE_URL + "/users/shows/{id}")
     public String updateShowUser(@PathVariable("id") UUID id,
-                              @ModelAttribute("request") UsersShowRequest usersShowRequest,
-                              Model model) {
-        usersShowsFeignClient.updateShow(KeycloakUtils.getBearerToken(), usersShowRequest.getShowId(), usersShowRequest);
-        return "redirect:/";
+                                 @ModelAttribute("request") UsersShowRequest usersShowRequest,
+                                 Model model) {
+        try {
+            usersShowsFeignClient.updateShow(KeycloakUtils.getBearerToken(), usersShowRequest.getShowId(), usersShowRequest);
+            return "redirect:/";
+        } catch (FeignException e) {
+            return handleFeignException(model, e);
+        }
     }
 
     @PreAuthorize("hasAnyRole('USER')")
@@ -143,6 +152,12 @@ public class FrontController {
     @PreAuthorize("hasAnyRole('ADMIN')")
     public String getCreatePage(Model model) {
         return "addShow";
+    }
+
+    private String handleFeignException(Model model, FeignException e){
+        model.addAttribute("error", e.status());
+        model.addAttribute("details", e.contentUTF8());
+        return "error";
     }
 
 }

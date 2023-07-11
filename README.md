@@ -23,12 +23,29 @@ Default pre configured users: `admin admin`; `user user`
 | *Users page* |
 | ![Users add show page](/pictures/4.jpg "Users add show page") |
 | *Users add show page* |
-| ![Swagger](/pictures/5.jpg "Swagger") |
-| *Swagger* |
 | ![Users added shows page](/pictures/6.jpg "Users added shows page") |
 | *Users added shows page* |  
+| ![Logic error page](/pictures/7.jpg "Logic error page") |
+| *Logic error page* |
+| ![Swagger](/pictures/5.jpg "Swagger") |
+| *Swagger* |
 
 -----
+**Technology stack:**
+* Framework: Spring boot 2
+* Build: Maven
+* ORM: Hibernate
+* DB: postgres
+* Local run: Docker
+* SSO: Keycloak
+* Mapping: Mapstruct
+* Errors: zalando/problem
+* Http client: feign
+* Swagger: springdoc-openapi
+* Front: thymeleaf, bootstrap (pain in the ass, should've used separate front)
+* Migrations: liquibase
+* And probabbly something else I forgot  
+
 **Structure:**
 * services\
   Contains backend services
@@ -45,18 +62,3 @@ Default pre configured users: `admin admin`; `user user`
     * ...
 * docker \
   Contains docker-compose run files for easy running  
-
-**Technology stack:**
-* Framework: Spring boot 2
-* Build: Maven
-* ORM: Hibernate
-* DB: postgres
-* Local run: Docker
-* SSO: Keycloak
-* Mapping: Mapstruct
-* Errors: zalando/problem
-* Http client: feign
-* Swagger: springdoc-openapi
-* Front: thymeleaf, bootstrap (pain in the ass, should've used separate front)
-* Migrations: liquibase
-* And probabbly something else I forgot

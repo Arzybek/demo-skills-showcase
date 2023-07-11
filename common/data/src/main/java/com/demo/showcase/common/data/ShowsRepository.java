@@ -1,5 +1,6 @@
 package com.demo.showcase.common.data;
 
+import com.demo.showcase.common.dto.ShowEpisodesView;
 import com.demo.showcase.common.dto.ShowRequestDto;
 import com.demo.showcase.common.dto.ShowShortInfo;
 import com.demo.showcase.common.dto.ShowView;
@@ -31,7 +32,9 @@ public class ShowsRepository extends BaseRepository<ShowEntity> {
                               from ShowEntity s
                               where lower(s.title) like concat('%',:title,'%') and s.isDeleted = false
                               """, ShowShortInfo.class)
-                 .setParameter("title", title.toLowerCase().strip())
+                 .setParameter("title",
+                               title.toLowerCase()
+                                    .strip())
                  .getResultList();
     }
 
@@ -42,6 +45,17 @@ public class ShowsRepository extends BaseRepository<ShowEntity> {
                               from ShowEntity s
                               where s.id = :id and s.isDeleted = false
                               """, ShowView.class)
+                 .setParameter("id", id)
+                 .getSingleResult();
+    }
+
+    public ShowEpisodesView getEpisodesInfoById(UUID id) {
+        return em.createQuery("""
+                              select new com.demo.showcase.common.dto.ShowEpisodesView(
+                              s.id, s.episodesCount, s.seasonsCount)
+                              from ShowEntity s
+                              where s.id = :id and s.isDeleted = false
+                              """, ShowEpisodesView.class)
                  .setParameter("id", id)
                  .getSingleResult();
     }
