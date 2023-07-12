@@ -1,46 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>TV Shows demo app</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <th:block th:include="fragments/general.html :: headerfiles"></th:block>
 </head>
 <body>
-<a href="/">
-    <button>Home</button>
-</a>
-<a href="/front/create">
-    <button>Add show</button>
-</a>
-<form th:action="@{/front/search}" method="get">
-    <input type="text" name="searchTitle" th:value="${searchTitle}" placeholder="Find TV Show by name">
-    <button type="submit">Search</button>
-</form>
+<div th:replace="fragments/general.html :: navbarAdmin"></div>
 <br/>
-<table>
+<table class="table table-fit table-bordered">
     <tbody>
     <tr>
-        <th>Title</th>
-        <th>Stage</th>
-        <th>Genre</th>
-        <th>Start date</th>
-        <th>Country</th>
-        <th>End date</th>
-        <th>Episodes count</th>
-        <th>Seasons count</th>
-        <th>Action</th>
+        <th class="table-dark">Title</th>
+        <th class="table-dark">Stage</th>
+        <th class="table-dark">Genre</th>
+        <th class="table-dark">Start date</th>
+        <th class="table-dark">Country</th>
+        <th class="table-dark">End date</th>
+        <th class="table-dark">Episodes count</th>
+        <th class="table-dark">Seasons count</th>
+        <th class="table-dark">Action</th>
     </tr>
     <tr>
         <form th:action="@{/front/{id}(id=${show.id})}" th:object="${show}" th:method="put">
-            <td><input type="text" name="title" th:value="${show.title}"></td>
-            <td><select size="3" name="stage">
+            <td><input type="text" class="form-control" name="title" th:value="${show.title}"></td>
+            <td><select class="form-select" size="3" name="stage">
                 <option value="AIRING" selected>Airing</option>
                 <option value="FINISHED">Finished</option>
                 <option value="CLOSED">Closed</option>
             </select></td>
-            <td><select size="8" name="genre">
+            <td><select class="form-select" size="3" name="genre">
                 <option value="COMEDY" selected>Comedy</option>
                 <option value="FANTASY">Fantasy</option>
                 <option value="ACTION">Action</option>
@@ -51,12 +38,12 @@
                 <option value="CARTOON">Cartoon</option>
             </select></td>
             <td><input type="date" name="startDate" th:value="${show.startDate}"></td>
-            <td><input type="text" name="country" th:value="${show.country}"></td>
-            <td><input type="date" name="endDate" th:value="${show.endDate}"></td>
-            <td><input type="text" name="episodesCount" th:value="${show.episodesCount}"></td>
-            <td><input type="text" name="seasonsCount" th:value="${show.seasonsCount}"></td>
+            <td><input type="text" class="form-control" name="country" th:value="${show.country}"></td>
+            <td><input type="date" class="form-control" name="endDate" th:value="${show.endDate}"></td>
+            <td><input type="text" class="form-control" name="episodesCount" th:value="${show.episodesCount}"></td>
+            <td><input type="text" class="form-control" name="seasonsCount" th:value="${show.seasonsCount}"></td>
             <td>
-                <button type="submit">UPDATE</button>
+                <button type="submit" class="btn btn-outline-success">UPDATE</button>
             </td>
         </form>
     </tr>

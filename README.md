@@ -19,6 +19,8 @@ Default pre configured users: `admin admin`; `user user`
 | *Main page (admin)* |
 | ![Edit page (admin)](/pictures/2.jpg "Edit page (admin)") |
 | *Edit page (admin)* |
+| ![Show info page](/pictures/8.jpg "Show info page") |
+| *Show info page* |
 | ![Users page](/pictures/3.jpg "Users page") |
 | *Users page* |
 | ![Users add show page](/pictures/4.jpg "Users add show page") |

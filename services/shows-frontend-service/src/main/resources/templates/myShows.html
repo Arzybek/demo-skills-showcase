@@ -1,48 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="UTF-8">
-    <title>TV Shows demo app</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <th:block th:include="fragments/general.html :: headerfiles"></th:block>
 </head>
 <body>
-<a href="/">
-    <button>Home</button>
-</a>
-<a href="/front/myShows">
-    <button>My shows</button>
-</a>
+<div th:replace="fragments/general.html :: navbarUser"></div>
 <!--<form th:action="@{/front/search}" method="get">-->
 <!--    <input type="text" name="searchTitle" th:value="${searchTitle}" placeholder="Find TV Show by name">-->
 <!--    <button type="submit">Search</button>-->
 <!--</form>-->
 <br/>
-<table>
+<table class="table table-fit table-hover table-bordered">
     <tbody>
     <tr>
-        <th>Show</th>
-        <th>Episodes watched</th>
-        <th>Seasons watched</th>
-        <th>Action</th>
+        <th class="table-dark">Show</th>
+        <th class="table-dark">Episodes watched</th>
+        <th class="table-dark">Seasons watched</th>
+        <th class="table-dark">Action</th>
+        <th class="table-dark">Action</th>
     </tr>
     <tr th:each="record: ${records}">
         <td><a th:href="@{/front/{id}(id=${record.showId})}"><span th:text="${record.showTitle}"/></a></td>
 
         <form th:action="@{/front/users/shows/{id}(id=${record.showId})}" th:object="${request}" th:method="put">
             <td style="display:none;"><input type="text" name="showId" th:value="${record.showId}"></td>
-            <td><input type="text" name="episodesWatched" th:value="${record.episodesWatched}"><div>/<th:block
-                    th:text="${record.episodesCount}"></th:block></div></td>
-            <td><input type="text" name="seasonsWatched" th:value="${record.seasonsWatched}"><div>/<th:block
-                    th:text="${record.seasonsCount}"></th:block></div></td>
+            <td><input type="text" class="form-control" name="episodesWatched" th:value="${record.episodesWatched}">
+                <div>/
+                    <th:block
+                            th:text="${record.episodesCount}"></th:block>
+                </div>
+            </td>
+            <td><input type="text" class="form-control" name="seasonsWatched" th:value="${record.seasonsWatched}">
+                <div>/
+                    <th:block
+                            th:text="${record.seasonsCount}"></th:block>
+                </div>
+            </td>
             <td>
-                <button type="submit">Update</button>
+                <button class="btn btn-outline-success" type="submit">Update</button>
             </td>
         </form>
         <td>
             <form th:action="@{/front/myShows/{id}(id=${record.id})}"
-                  th:method="delete"><input type="submit" value="Delete"/></form>
+                  th:method="delete">
+                <button class="btn btn-outline-success" type="submit">Delete</button>
+            </form>
         </td>
     </tr>
     </tbody>

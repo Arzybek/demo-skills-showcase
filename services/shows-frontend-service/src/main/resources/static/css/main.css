@@ -1,9 +1,35 @@
-td, th {
-    border: 1px solid black;
-    padding-left: 1em;
-    padding-right: 1em;
+table.table-fit {
+    width: auto !important;
+    table-layout: auto !important;
+    margin-left: 1em !important;
 }
-table {
-    border-collapse: collapse;
-    text-align: center;
+table.table-fit thead th, table.table-fit tfoot th {
+    width: auto !important;
+}
+table.table-fit tbody td, table.table-fit tfoot td {
+    width: auto !important;
+}
+
+#wrap {
+    overflow: hidden;
+    position: relative;
+    float: left;
+}
+
+#wrap img.fake {
+    float: left;
+    visibility: hidden;
+    width: auto;
+}
+
+#img_wrap {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#img_wrap img.normal {
+    width: 70%;
 }
