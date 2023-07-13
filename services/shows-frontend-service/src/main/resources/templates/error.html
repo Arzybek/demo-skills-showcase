@@ -3,12 +3,17 @@
 <head>
     <th:block th:include="fragments/general.html :: headerfiles"></th:block>
 </head>
+
 <body>
-<h1 th:align="center"><p th:text="${error}"></p></h1>
-<h1 th:align="center">Something went wrong! </h1>
-<h2><p th:align="center">Details:</p>
-    <div th:text="${details}" style="padding: 0 0 0 2em"></div>
-</h2>
-<div th:align="center"><button><a href="/">Go Home</a></button></div>
+<div class="d-flex align-items-center justify-content-center h-auto pt-5">
+    <div class="text-center">
+        <h1 class="display-1 fw-bold" th:text="${error}"></h1>
+        <p class="fs-3"> <span class="text-danger">Opps!</span> Something went wrong!</p>
+        <p class="lead">Details:</p>
+        <p class="lead" th:text="${details}"></p>
+        <a href="/" class="btn btn-primary">Go Home</a>
+    </div>
+</div>
 </body>
+
 </html>
