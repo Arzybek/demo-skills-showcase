@@ -23,19 +23,10 @@
         <form th:action="@{/front/{id}(id=${show.id})}" th:object="${show}" th:method="put">
             <td><input type="text" class="form-control" name="title" th:value="${show.title}"></td>
             <td><select class="form-select" size="3" name="stage">
-                <option value="AIRING" selected>Airing</option>
-                <option value="FINISHED">Finished</option>
-                <option value="CLOSED">Closed</option>
+                <option th:each="stage: ${stages}" th:value="${stage}" th:text="${stage}"></option>
             </select></td>
             <td><select class="form-select" size="3" name="genre">
-                <option value="COMEDY" selected>Comedy</option>
-                <option value="FANTASY">Fantasy</option>
-                <option value="ACTION">Action</option>
-                <option value="THRILLER">Thriller</option>
-                <option value="SITCOM">Sitcom</option>
-                <option value="HORROR">Horror</option>
-                <option value="ANIME">Anime</option>
-                <option value="CARTOON">Cartoon</option>
+                <option th:each="genre: ${genres}" th:value="${genre}" th:text="${genre}"></option>
             </select></td>
             <td><input type="date" name="startDate" th:value="${show.startDate}"></td>
             <td><input type="text" class="form-control" name="country" th:value="${show.country}"></td>

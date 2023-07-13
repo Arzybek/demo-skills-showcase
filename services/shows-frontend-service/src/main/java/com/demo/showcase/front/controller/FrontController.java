@@ -6,6 +6,9 @@ import com.demo.showcase.common.dto.ShowShortInfo;
 import com.demo.showcase.common.dto.ShowView;
 import com.demo.showcase.common.dto.UsersShowRequest;
 import com.demo.showcase.common.dto.mapper.ShowsDtoMapper;
+import com.demo.showcase.common.enums.ShowGenre;
+import com.demo.showcase.common.enums.ShowStage;
+import com.demo.showcase.common.feign.DictionariesFeignClient;
 import com.demo.showcase.common.feign.ShowsDataFeignClient;
 import com.demo.showcase.common.feign.UsersShowsFeignClient;
 import com.demo.showcase.common.sso.KeycloakUtils;
@@ -36,6 +39,8 @@ public class FrontController {
     private final ShowsDataFeignClient showsDataFeignClient;
 
     private final UsersShowsFeignClient usersShowsFeignClient;
+
+    private final DictionariesFeignClient dictionariesFeignClient;
 
     private final ShowsDtoMapper showsDtoMapper;
 
@@ -129,9 +134,17 @@ public class FrontController {
     @GetMapping(BASE_URL + "/edit/{id}")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public String getEditPage(@PathVariable("id") UUID id, Model model) {
-        ShowView show = showsDataFeignClient.findShowInfoById(KeycloakUtils.getBearerToken(), id);
-        model.addAttribute("show", show);
-        return "showEdit";
+        try {
+            ShowView show = showsDataFeignClient.findShowInfoById(KeycloakUtils.getBearerToken(), id);
+            List<ShowGenre> genres = dictionariesFeignClient.getGenres(KeycloakUtils.getBearerToken());
+            List<ShowStage> showsStages = dictionariesFeignClient.getShowsStages(KeycloakUtils.getBearerToken());
+            model.addAttribute("show", show)
+                 .addAttribute("genres", genres)
+                 .addAttribute("stages", showsStages);
+            return "showEdit";
+        } catch (FeignException e) {
+            return handleFeignException(model, e);
+        }
     }
 
     @PutMapping(BASE_URL + "/{id}")
@@ -151,10 +164,18 @@ public class FrontController {
     @GetMapping(BASE_URL + "/create")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public String getCreatePage(Model model) {
-        return "addShow";
+        try {
+            List<ShowGenre> genres = dictionariesFeignClient.getGenres(KeycloakUtils.getBearerToken());
+            List<ShowStage> showsStages = dictionariesFeignClient.getShowsStages(KeycloakUtils.getBearerToken());
+            model.addAttribute("genres", genres)
+                 .addAttribute("stages", showsStages);
+            return "addShow";
+        } catch (FeignException e) {
+            return handleFeignException(model, e);
+        }
     }
 
-    private String handleFeignException(Model model, FeignException e){
+    private String handleFeignException(Model model, FeignException e) {
         model.addAttribute("error", e.status());
         model.addAttribute("details", e.contentUTF8());
         return "error";
