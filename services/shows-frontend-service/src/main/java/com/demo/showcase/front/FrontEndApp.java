@@ -10,7 +10,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @Slf4j
-@EnableFeignClients(clients = {ShowsDataFeignClient.class, UsersShowsFeignClient.class, DictionariesFeignClient.class})
 @SpringBootApplication(scanBasePackages = "com.demo.showcase", exclude = {DataSourceAutoConfiguration.class})
 public class FrontEndApp {
 

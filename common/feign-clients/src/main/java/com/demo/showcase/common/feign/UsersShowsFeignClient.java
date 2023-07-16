@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 import java.util.UUID;
 
-@FeignClient(value = "usersShowsClient", url = "http://localhost:8080")
+@FeignClient(value = "usersShowsClient", url = "${http-clients.backend-url}")
 public interface UsersShowsFeignClient {
 
     @RequestMapping(method = RequestMethod.POST, value = "/api/users/shows")
