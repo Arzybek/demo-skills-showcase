@@ -4,7 +4,7 @@ Demo project for skills demonstration \
 **About project:** TV shows list type of website with complex backend (microservices architecture) \
 **RUN GUIDE:** \
 ***Auto***:
-- `mvn clean install` in root folder
+- `./mvnw clean install` in root folder
 - `cd docker` and start postgres, configured keycloak and services: `sudo docker-compose -f compose.yml up -d`
 
 ***Manual***:
