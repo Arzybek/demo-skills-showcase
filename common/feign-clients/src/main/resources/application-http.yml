@@ -1,3 +1,6 @@
+http-clients:
+  backend-url: ${BACKEND_URL:http://localhost:8080}
+
 feign:
   client:
     config:

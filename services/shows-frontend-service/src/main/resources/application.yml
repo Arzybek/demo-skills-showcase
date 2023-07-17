@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: ${SERVER_PORT:8081}
 spring:
   mvc:
     hiddenmethod:
@@ -10,7 +10,7 @@ spring:
       base-path: /front
 
 keycloak:
-  auth-server-url: http://localhost:8484/auth
+  auth-server-url: ${KEYCLOAK_URL:http://localhost:8484/auth}
   realm: my_realm
   resource: my_client
   public-client: true

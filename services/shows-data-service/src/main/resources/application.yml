@@ -23,13 +23,13 @@ spring:
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
 
 server:
-  port: 8080
+  port: ${SERVER_PORT:8080}
   error:
     whitelabel:
       enabled: false
 
 keycloak:
-  auth-server-url: http://localhost:8484/auth
+  auth-server-url: ${KEYCLOAK_URL:http://localhost:8484/auth}
   realm: my_realm
   resource: my_client
   public-client: true

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
-@FeignClient(value = "dictionariesClient", url = "http://localhost:8080")
+@FeignClient(value = "dictionariesClient", url = "${http-clients.backend-url}")
 public interface DictionariesFeignClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/api/dictionaries/genres")

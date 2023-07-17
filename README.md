@@ -3,18 +3,26 @@
 Demo project for skills demonstration \
 **About project:** TV shows list type of website with complex backend (microservices architecture) \
 **RUN GUIDE:** \
-`cd docker` \
-Start postgres and configured keycloak: `sudo docker-compose -f compose.yml up -d` \
-Start migration service with environment variable: POSTGRES_SCHEMA=shows \
-Start data service \
-Start frontend service \
+***Auto***:
+- `mvn clean install` in root folder
+- `cd docker` and start postgres, configured keycloak and services: `sudo docker-compose -f compose.yml up -d`
+
+***Manual***:
+- `cd docker`
+- Start postgres and configured keycloak: `sudo docker-compose -f compose_old.yml up -d` 
+- `mvn clean install` in root folder and `cd services/*-service/target` and `java
+  -jar *.jar` or use IDE to start services 
+- 1. Start migration service with environment variable: POSTGRES_SCHEMA=shows; 
+  2. Start data service
+  3. Start frontend service; 
+
 You're up, frontend address by default is: localhost:8081/ \
 Backend swagger is available at localhost:8080/swagger-ui/index.html \
-Default pre configured users: `admin admin`; `user user`  
+Default pre configured users: `admin admin`; `user user`
 
 -----
 **PICTURES (some might be outdated):**
-| ![Main page (admin)](/pictures/1.jpg "Main page (admin)") | 
+| ![Main page (admin)](/pictures/1.jpg "Main page (admin)") |
 | :--: |
 | *Main page (admin)* |
 | ![Edit page (admin)](/pictures/2.jpg "Edit page (admin)") |
@@ -34,11 +42,12 @@ Default pre configured users: `admin admin`; `user user`
 
 -----
 **Technology stack:**
+
 * Framework: Spring boot 2
 * Build: Maven
 * ORM: Hibernate
 * DB: postgres
-* Local run: Docker
+* Containers: Docker, Docker-compose
 * SSO: Keycloak
 * Mapping: Mapstruct
 * Errors: zalando/problem
@@ -46,9 +55,10 @@ Default pre configured users: `admin admin`; `user user`
 * Swagger: springdoc-openapi
 * Front: thymeleaf, bootstrap (pain in the ass, should've used separate front)
 * Migrations: liquibase
-* And probabbly something else I forgot  
+* And probabbly something else I forgot
 
 **Structure:**
+
 * services\
   Contains backend services
     * Migration service \
