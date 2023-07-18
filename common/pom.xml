@@ -19,6 +19,7 @@
         <module>dto</module>
         <module>security</module>
         <module>openapi</module>
+        <module>logging</module>
     </modules>
 
     <dependencies>

@@ -6,8 +6,9 @@ Demo project for skills demonstration \
 ***Auto***:
 - `./mvnw clean install` in root folder
 - `cd docker` and start postgres, configured keycloak and services: `sudo docker-compose -f compose.yml up -d`
+<details>
+<summary><b>Manual:</b></summary>
 
-***Manual***:
 - `cd docker`
 - Start postgres and configured keycloak: `sudo docker-compose -f compose_old.yml up -d` 
 - `mvn clean install` in root folder and `cd services/*-service/target` and `java
@@ -15,13 +16,16 @@ Demo project for skills demonstration \
 - 1. Start migration service with environment variable: POSTGRES_SCHEMA=shows; 
   2. Start data service
   3. Start frontend service; 
+</details>
 
 You're up, frontend address by default is: localhost:8081/ \
 Backend swagger is available at localhost:8080/swagger-ui/index.html \
 Default pre configured users: `admin admin`; `user user`
 
 -----
-**PICTURES (some might be outdated):**
+<details>
+<summary><b>SCREENSHOTS:</b></summary>
+
 | ![Main page (admin)](/pictures/1.jpg "Main page (admin)") |
 | :--: |
 | *Main page (admin)* |
@@ -39,6 +43,7 @@ Default pre configured users: `admin admin`; `user user`
 | *Logic error page* |
 | ![Swagger](/pictures/5.jpg "Swagger") |
 | *Swagger* |
+</details>
 
 -----
 **Technology stack:**
@@ -55,9 +60,11 @@ Default pre configured users: `admin admin`; `user user`
 * Swagger: springdoc-openapi
 * Front: thymeleaf, bootstrap (pain in the ass, should've used separate front)
 * Migrations: liquibase
+* Logging: Logback
 * And probabbly something else I forgot
 
-**Structure:**
+<details>
+<summary><b>Structure:</b></summary>
 
 * services\
   Contains backend services
@@ -74,3 +81,4 @@ Default pre configured users: `admin admin`; `user user`
     * ...
 * docker \
   Contains docker-compose run files for easy running  
+</details>

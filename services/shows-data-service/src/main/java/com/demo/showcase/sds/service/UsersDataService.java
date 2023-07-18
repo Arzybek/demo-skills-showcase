@@ -37,6 +37,7 @@ public class UsersDataService {
 
     @Transactional
     public void deleteUserShow(UUID id) {
+        log.info("Пользователь {} удалил запись о сериале с id {}", KeycloakUtils.getUserId(), id);
         repository.deactualizeById(id);
     }
 

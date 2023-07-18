@@ -28,6 +28,11 @@
             <artifactId>postgresql</artifactId>
             <version>42.4.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.demo</groupId>
+            <artifactId>logging</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 
     <build>
