@@ -27,10 +27,3 @@ server:
   error:
     whitelabel:
       enabled: false
-
-keycloak:
-  auth-server-url: ${KEYCLOAK_URL:http://localhost:8484/auth}
-  realm: my_realm
-  resource: my_client
-  public-client: true
-  bearer-only: true

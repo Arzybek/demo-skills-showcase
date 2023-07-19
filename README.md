@@ -20,6 +20,7 @@ Demo project for skills demonstration \
 
 You're up, frontend address by default is: localhost:8081/ \
 Backend swagger is available at localhost:8080/swagger-ui/index.html \
+Actuator is available at localhost:8080/actuator/ \
 Default pre configured users: `admin admin`; `user user`
 
 -----
@@ -60,7 +61,7 @@ Default pre configured users: `admin admin`; `user user`
 * Swagger: springdoc-openapi
 * Front: thymeleaf, bootstrap (pain in the ass, should've used separate front)
 * Migrations: liquibase
-* Logging: Logback
+* Utils: Logback, Actuator
 * And probabbly something else I forgot
 
 <details>

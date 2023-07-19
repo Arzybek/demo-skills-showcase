@@ -13,13 +13,20 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-oauth2-client</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
         <dependency>
             <groupId>com.demo</groupId>
             <artifactId>dto</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>com.demo</groupId>
+            <artifactId>utils</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
+
+
 </project>

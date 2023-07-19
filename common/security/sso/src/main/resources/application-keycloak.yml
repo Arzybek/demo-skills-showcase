@@ -3,4 +3,3 @@ keycloak:
   realm: my_realm
   resource: my_client
   public-client: true
-  bearer-only: true

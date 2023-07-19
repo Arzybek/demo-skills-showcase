@@ -8,9 +8,3 @@ spring:
   data:
     rest:
       base-path: /front
-
-keycloak:
-  auth-server-url: ${KEYCLOAK_URL:http://localhost:8484/auth}
-  realm: my_realm
-  resource: my_client
-  public-client: true

@@ -20,6 +20,8 @@
         <module>security</module>
         <module>openapi</module>
         <module>logging</module>
+        <module>actuator</module>
+        <module>utils</module>
     </modules>
 
     <dependencies>
