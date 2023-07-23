@@ -1,5 +1,6 @@
 package com.demo.showcase.common.dto;
 
+import com.demo.showcase.common.enums.WatchState;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -22,5 +23,7 @@ public class GetUserShowsResponse {
     private Integer seasonsCount;
 
     private Integer episodesCount;
+
+    private WatchState state;
 
 }

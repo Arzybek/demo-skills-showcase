@@ -8,6 +8,7 @@ import com.demo.showcase.common.dto.UsersShowRequest;
 import com.demo.showcase.common.dto.mapper.ShowsDtoMapper;
 import com.demo.showcase.common.enums.ShowGenre;
 import com.demo.showcase.common.enums.ShowStage;
+import com.demo.showcase.common.enums.WatchState;
 import com.demo.showcase.common.feign.DictionariesFeignClient;
 import com.demo.showcase.common.feign.ShowsDataFeignClient;
 import com.demo.showcase.common.feign.UsersShowsFeignClient;
@@ -74,9 +75,15 @@ public class FrontController {
 
     @GetMapping(BASE_URL + "/users/shows/{id}")
     public String addShowUserPage(@PathVariable("id") UUID id, Model model) {
-        ShowView show = showsDataFeignClient.findShowInfoById(KeycloakUtils.getBearerToken(), id);
-        model.addAttribute("show", show);
-        return "addShowUser";
+        try {
+            ShowView show = showsDataFeignClient.findShowInfoById(KeycloakUtils.getBearerToken(), id);
+            List<WatchState> states = dictionariesFeignClient.getStates(KeycloakUtils.getBearerToken());
+            model.addAttribute("states", states);
+            model.addAttribute("show", show);
+            return "addShowUser";
+        } catch (FeignException e) {
+            return handleFeignException(model, e);
+        }
     }
 
     @PostMapping(BASE_URL + "/users/shows/{id}")
@@ -106,9 +113,15 @@ public class FrontController {
     @PreAuthorize("hasAnyRole('USER')")
     @GetMapping(BASE_URL + "/myShows")
     public String myShows(Model model) {
-        List<GetUserShowsResponse> records = usersShowsFeignClient.getUserShows(KeycloakUtils.getBearerToken());
-        model.addAttribute("records", records);
-        return "myShows";
+        try {
+            List<GetUserShowsResponse> records = usersShowsFeignClient.getUserShows(KeycloakUtils.getBearerToken());
+            List<WatchState> states = dictionariesFeignClient.getStates(KeycloakUtils.getBearerToken());
+            model.addAttribute("states", states);
+            model.addAttribute("records", records);
+            return "myShows";
+        } catch (FeignException e) {
+            return handleFeignException(model, e);
+        }
     }
 
     @DeleteMapping(BASE_URL + "/myShows/{id}")

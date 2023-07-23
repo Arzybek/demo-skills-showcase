@@ -2,6 +2,7 @@ package com.demo.showcase.common.data;
 
 import com.demo.showcase.common.enums.ShowGenre;
 import com.demo.showcase.common.enums.ShowStage;
+import com.demo.showcase.common.enums.WatchState;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -40,5 +41,9 @@ public class UserShowsEntity {
 
     @Column(name = "is_deleted")
     private boolean isDeleted;
+
+    @Column(name = "state")
+    @Enumerated(EnumType.STRING)
+    private WatchState state;
 
 }

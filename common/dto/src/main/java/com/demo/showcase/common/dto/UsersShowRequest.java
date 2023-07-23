@@ -1,5 +1,6 @@
 package com.demo.showcase.common.dto;
 
+import com.demo.showcase.common.enums.WatchState;
 import lombok.Data;
 
 import java.util.UUID;
@@ -18,5 +19,7 @@ public class UsersShowRequest {
     @Positive
     @NotNull
     private Integer episodesWatched;
+
+    private WatchState state;
 
 }

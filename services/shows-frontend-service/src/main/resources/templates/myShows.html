@@ -16,6 +16,7 @@
         <th class="table-dark">Show</th>
         <th class="table-dark">Episodes watched</th>
         <th class="table-dark">Seasons watched</th>
+        <th class="table-dark">State</th>
         <th class="table-dark">Action</th>
         <th class="table-dark">Action</th>
     </tr>
@@ -35,6 +36,11 @@
                     <th:block
                             th:text="${record.seasonsCount}"></th:block>
                 </div>
+            </td>
+            <td><select id="state" class="form-select" size="3" name="state">
+                <option th:each="state: ${states}" th:value="${state}" th:text="${state}"
+                        th:selected="${record.state==state}"></option>
+            </select></td>
             </td>
             <td>
                 <button class="btn btn-outline-success" type="submit">Update</button>
