@@ -1,13 +1,11 @@
 package com.demo.showcase.common.data;
 
-import com.demo.showcase.common.enums.ShowGenre;
-import com.demo.showcase.common.enums.ShowStage;
 import com.demo.showcase.common.enums.WatchState;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.validator.constraints.Range;
 
-import java.time.LocalDate;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,5 +43,9 @@ public class UserShowsEntity {
     @Column(name = "state")
     @Enumerated(EnumType.STRING)
     private WatchState state;
+
+    @Column(name = "score")
+    @Range(min = 1, max = 10)
+    private Integer score;
 
 }

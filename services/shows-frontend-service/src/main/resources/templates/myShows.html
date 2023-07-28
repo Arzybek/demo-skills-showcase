@@ -17,6 +17,7 @@
         <th class="table-dark">Episodes watched</th>
         <th class="table-dark">Seasons watched</th>
         <th class="table-dark">State</th>
+        <th class="table-dark">Score</th>
         <th class="table-dark">Action</th>
         <th class="table-dark">Action</th>
     </tr>
@@ -42,6 +43,10 @@
                         th:selected="${record.state==state}"></option>
             </select></td>
             </td>
+            <td><select class="form-select" size="3" name="score">
+                <option th:each="score: ${scores}" th:value="${score}" th:text="${score}"
+                        th:selected="${record.score==score}"></option>
+            </select></td>
             <td>
                 <button class="btn btn-outline-success" type="submit">Update</button>
             </td>

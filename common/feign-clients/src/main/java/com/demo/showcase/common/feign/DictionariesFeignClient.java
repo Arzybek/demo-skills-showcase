@@ -14,6 +14,9 @@ import java.util.List;
 @FeignClient(value = "dictionariesClient", url = "${http-clients.backend-url}")
 public interface DictionariesFeignClient {
 
+    @RequestMapping(method = RequestMethod.GET, value = "/api/dictionaries/scores")
+    List<Integer> getScores(@RequestHeader("Authorization") String bearerToken);
+
     @RequestMapping(method = RequestMethod.GET, value = "/api/dictionaries/watchStates")
     List<WatchState> getStates(@RequestHeader("Authorization") String bearerToken);
 

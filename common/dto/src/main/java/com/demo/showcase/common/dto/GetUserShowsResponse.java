@@ -26,4 +26,6 @@ public class GetUserShowsResponse {
 
     private WatchState state;
 
+    private Integer score;
+
 }

@@ -27,4 +27,8 @@ public interface DictionariesApi {
     @GetMapping("/watchStates")
     @Operation(summary = "Получение списка статусов шоу в списке юзера")
     List<WatchState> getStates();
+
+    @GetMapping("/scores")
+    @Operation(summary = "Получение возможных оценок")
+    List<Integer> getScores();
 }

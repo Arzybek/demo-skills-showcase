@@ -5,7 +5,15 @@
 
     <changeSet id="0.0.2-1" author="kat">
         <addColumn tableName="users_shows">
-            <column name="state" type="varchar" defaultValue="WATCHING"/>
+            <column name="state" type="varchar" defaultValue="WATCHING">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="0.0.2-2" author="kat">
+        <addColumn tableName="users_shows">
+            <column name="score" type="int"/>
         </addColumn>
     </changeSet>
 

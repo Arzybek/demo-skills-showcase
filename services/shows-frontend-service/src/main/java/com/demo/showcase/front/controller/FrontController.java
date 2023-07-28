@@ -78,6 +78,8 @@ public class FrontController {
         try {
             ShowView show = showsDataFeignClient.findShowInfoById(KeycloakUtils.getBearerToken(), id);
             List<WatchState> states = dictionariesFeignClient.getStates(KeycloakUtils.getBearerToken());
+            List<Integer> scores = dictionariesFeignClient.getScores(KeycloakUtils.getBearerToken());
+            model.addAttribute("scores", scores);
             model.addAttribute("states", states);
             model.addAttribute("show", show);
             return "addShowUser";
@@ -116,6 +118,8 @@ public class FrontController {
         try {
             List<GetUserShowsResponse> records = usersShowsFeignClient.getUserShows(KeycloakUtils.getBearerToken());
             List<WatchState> states = dictionariesFeignClient.getStates(KeycloakUtils.getBearerToken());
+            List<Integer> scores = dictionariesFeignClient.getScores(KeycloakUtils.getBearerToken());
+            model.addAttribute("scores", scores);
             model.addAttribute("states", states);
             model.addAttribute("records", records);
             return "myShows";

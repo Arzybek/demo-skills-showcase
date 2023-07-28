@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,5 +31,12 @@ public class DictionariesApiController implements DictionariesApi {
     public List<WatchState> getStates() {
         return Arrays.stream(WatchState.values())
                      .toList();
+    }
+
+    @Override
+    public List<Integer> getScores() {
+        return IntStream.rangeClosed(1, 10)
+                        .boxed()
+                        .toList();
     }
 }

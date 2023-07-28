@@ -57,6 +57,7 @@ public class UsersDataService {
         userShowsEntity.setEpisodesWatched(request.getEpisodesWatched());
         userShowsEntity.setSeasonsWatched(request.getSeasonsWatched());
         userShowsEntity.setState(request.getState());
+        userShowsEntity.setScore(request.getScore());
         return userShowsEntity;
     }
 

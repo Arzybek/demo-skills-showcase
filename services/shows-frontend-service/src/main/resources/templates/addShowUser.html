@@ -13,6 +13,7 @@
         <th class="table-dark">Episodes watched</th>
         <th class="table-dark">Seasons watched</th>
         <th class="table-dark">State</th>
+        <th class="table-dark">Score</th>
         <th class="table-dark">Action</th>
     </tr>
     <tr>
@@ -25,6 +26,9 @@
                     th:text="${show.seasonsCount}"></th:block></div></td>
             <td><select class="form-select" size="3" name="state">
                 <option th:each="state: ${states}" th:value="${state}" th:text="${state}"></option>
+            </select></td>
+            <td><select class="form-select" size="3" name="score">
+                <option th:each="score: ${scores}" th:value="${score}" th:text="${score}"></option>
             </select></td>
             </td>
             <td>
