@@ -1,15 +1,8 @@
 version: 2.1
 
-parameters:
-  docker-container:
-    type: string
-    default: "production-dentapp-backend"
-    description: "Docker container name for DentApp Prod"
-
 jobs:
   deploy-to-development:
     docker:
-      - image: circleci/node:14
       - image: docker:20.10.9
     steps:
       - checkout
@@ -17,19 +10,18 @@ jobs:
       - run:
           name: Build Docker Image
           command: |
-            ./mvnw clean install
-            cd ./services/shows-migrations-service;
-            sudo docker build -t migrations-service:latest .
-            cd ../shows-data-service;
-            sudo docker build -t shows-data-service:latest .
-            cd ../shows-frontend-service;
-            sudo docker build -t shows-frontend-service:latest .
+            ls
+            chmod +x ./build.sh;
+            sh ./build.sh
+            docker build -f Dockerfile-migrations -t migrations-service:latest .
+            docker build -f Dockerfile-data -t shows-data-service:latest .
+            docker build -f Dockerfile-frontend -t shows-frontend-service:latest .
       - run:
           name: Compress Docker Image
           command: |
-            sudo docker save migrations-service:latest | gzip > migrations-service.tar.gz
-            sudo docker save shows-data-service:latest | gzip > shows-data-service.tar.gz
-            sudo docker save shows-frontend-service:latest | gzip > shows-frontend-service.tar.gz
+            docker save migrations-service:latest | gzip > migrations-service.tar.gz
+            docker save shows-data-service:latest | gzip > shows-data-service.tar.gz
+            docker save shows-frontend-service:latest | gzip > shows-frontend-service.tar.gz
       - run: ls -lh
       - persist_to_workspace:
           root: .
@@ -37,24 +29,24 @@ jobs:
             - shows-frontend-service.tar.gz
             - shows-data-service.tar.gz
             - migrations-service.tar.gz
-            - compose.yml
+            - ./docker/
   transfer-and-run:
-    docker:
-      - image: circleci/node:14
+    machine:
+      image: ubuntu-2004:202010-01
     steps:
       - attach_workspace:
           at: .
       - run:
           name: Install SSH And Configure
           command: |
-            echo $SSH_PRIVATE_KEY | base64 --decode > ./privateKey.pem
-            chmod 400 privateKey.pem
+            echo $SSH_PRIVATE_KEY | base64 --decode > ./id_rsa
+            chmod 400 id_rsa
       - run:
           name: Stop Remote Docker-Compose
           command: |
-            ssh -o "StrictHostKeyChecking=no" -i ./privateKey.pem $USER@$HOST '
+            ssh -o "StrictHostKeyChecking=no" -i ./id_rsa $USER@$HOST '
             if [ -f compose.yml ]; then
-            sudo docker-compose -f compose.yml down --rmi all
+            sudo docker-compose -f docker/compose.yml down --rmi all
             sudo rm compose.yml
             else
             echo "compose.yml not found"
@@ -63,16 +55,18 @@ jobs:
       - run:
           name: Transfer Files
           command: |
-            scp -o "StrictHostKeyChecking=no" -i ./privateKey.pem ./shows-frontend-service.tar.gz ./docker ./shows-data-service.tar.gz ./migrations-service.tar.gz $USER@$HOST:~/
+            scp -o "StrictHostKeyChecking=no" -i ./id_rsa ./shows-frontend-service.tar.gz ./shows-data-service.tar.gz ./migrations-service.tar.gz $USER@$HOST:~/
+            scp -o "StrictHostKeyChecking=no" -i ./id_rsa -r ./docker $USER@$HOST:~/
       - run:
           name: Decompress Docker Image | Run Compose
           command: |
-            ssh -o "StrictHostKeyChecking=no" -i ./privateKey.pem $USER@$HOST '
+            ssh -o "StrictHostKeyChecking=no" -i ./id_rsa $USER@$HOST '
             sudo gunzip -c ./shows-frontend-service.tar.gz | sudo docker load
             sudo gunzip -c ./shows-data-service.tar.gz | sudo docker load
             sudo gunzip -c ./migrations-service.tar.gz | sudo docker load
             sudo rm ./*.tar.gz
-            sudo docker-compose -f /docker/compose.yml up -d                    
+            cd docker
+            sudo docker compose -f compose.yml up -d                    
             '
 
 workflows:
